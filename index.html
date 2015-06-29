@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+
+<head>
+<meta charset="utf-8">
+<title> Deutschland sieht UFOs</title>
+
+<link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+
+
+<script src="//use.typekit.net/keb0kek.js"></script>
+<script>try{Typekit.load();}catch(e){}</script>
+
+
+
+
+<link rel="stylesheet" href="css/main.css" />
+
+</head>
+
+
+<body>
+
+
+<section id="heading">
+<big>Im Land der 'UFOs'</big>
+<div id='subheading'>Unbekannte Flugobjekte <br> in Deutschland von </div>
+<div id="zahlen">1970-2015</div> 
+<div id='byline'>Alsino Skowronnek<span id='datum'>, FH Potsdam,  Juli 2015</span></div>
+</section>
+
+
+<section id="descr">
+<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p> <br>
+<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+</section>
+
+
+
+<script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+<script src="d3/d3.js"></script>
+<script src="d3/d3.min.js"></script>
+
+
+
+<script>
+
+
+var width  = window.innerWidth;
+var height = 800;
+
+
+ var vis = d3.select("body")
+          .append("svg")
+          .attr("width", width)
+          .attr("height", height)
+          .attr("id","canvas");
+
+
+      /*---Mouse Interaction ---
+      .on('mouseover', function(data1) {
+          console.log(data1);
+          d3.select(this).style('fill','red');
+          d3.select(this).attr("opacity", 0.4);
+          d3.select(this).append("circle");
+          d3.select(this).attr("cy","200px");
+          d3.select(this).attr("r",data1*2);
+        })
+
+      .on('mouseout', function(data1) {
+          console.log(data1);
+          d3.select(this).style('fill', color);
+        })                                        
+
+      vis.selectAll("circles")
+      .data(data2)
+      .enter()
+      .append("circle")
+      .attr("fill", color)
+      .attr("cy","300px")
+      .attr("r","10px")
+      .attr("opacity", 0.5)
+      .attr("r", function(data2){
+          return (data2/1.1);
+      })
+      .attr("cx", function(data2){
+          return (data2*20);
+      })
+
+      vis.selectAll("circles")
+      .data(data3)
+      .enter()
+      .append("circle")
+      .attr("fill", color)
+      .attr("cy","400px")
+      .attr("r","10px")
+      .attr("opacity", 0.5)
+      .attr("r", function(data3){
+          return (data3/1.1);
+      })
+      .attr("cx", function(data3){
+          return (data3*20);
+      })                                */
+    
+
+/* --- How to use json with D3 --- */
+  d3.json("ufos.json", function(json) { 
+  //console.log(json);                      //console.log(json); // "json" is the variable for the whole dataset 
+                                          //console.log(json.dreams) // "dreams" is the name of the object of arrays, that we want to access
+                                          //console.log(json.dreams[1]);  // is the second array in the "dreams" object that we want to access
+                                          //console.log(json.dreams[1].daytime); // accesses the key of the second array with the value "daytime"
+
+
+
+//console.log(json.filter(function(d) { return d.Monat==1; }));
+
+var Jan = json.filter(function(d,i) { return d.Monat ==1; });
+var Feb = json.filter(function(d,i) { return d.Monat ==2; });
+var Mar = json.filter(function(d,i) { return d.Monat ==3; });
+var Apr = json.filter(function(d,i) { return d.Monat ==4; });
+var Mai = json.filter(function(d,i) { return d.Monat ==5; });
+var Jun = json.filter(function(d,i) { return d.Monat ==6; });
+var Jul = json.filter(function(d,i) { return d.Monat ==7; });
+var Aug = json.filter(function(d,i) { return d.Monat ==8; });
+var Sep = json.filter(function(d,i) { return d.Monat ==9; });
+var Oct = json.filter(function(d,i) { return d.Monat ==10; });
+var Nov = json.filter(function(d,i) { return d.Monat ==11; });
+var Nov = json.filter(function(d,i) { return d.Monat ==12; });
+
+
+//console.log(json.filter(function(d,i) { return d.Jahr ==2015; }));
+
+var j2015 = json.filter(function(d,i) { return d.Jahr ==2015; });
+
+
+console.log(d3.min(json, function(d) { return d.Jahr; }));
+console.log(d3.max(json, function(d) { return d.Jahr; }));
+
+
+/*var color =d3.scale.linear()
+            .domain([d3.min(json, function(d) { return d.lat; }),d3.max(json, function(d) { return d.lat; })])
+            .range(["red", "white"]);
+
+    console.log(d3.min(json, function(d) { return d.lat; }));
+    console.log(d3.min(json, function(d) { return d.lng; }));
+    */
+
+
+
+
+
+//Padding links und rechts
+var paddingX = 200;
+var paddingY = 50;
+
+
+// Variable definieren für y-Abstand zwischen den Reihen
+var abstand = function multiply (value){
+    var s=20;
+    return s* value;
+}
+
+//Variable für x-Abstand zwischen den Punkten
+var zwischen = 10;
+
+//Variable für Farbe
+var color = "#197575";
+//var color = "white";
+
+//Variable für path und text Farbe
+var colorPath = "white";
+var colorPathText = "orange";
+
+//Variable für radius
+var radius = 5;
+
+
+
+//2015
+  var circles2015_Jan = vis.selectAll("circles")
+      .data(json)
+      .enter()
+      .append("circle")
+      .filter(function(d){ return d.Monat == 1 && d.Jahr == 2015; })
+      .attr("fill", color)
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){   return paddingY+  abstand(1)})
+      .attr("r", radius)
+      .attr("opacity",.5)
+
+    .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'orange');
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+        })
+
+
+  var circles2015_Feb = vis.selectAll("circles")
+      .data(json)
+      .enter()
+      .append("circle")
+      .filter(function(d){ return d.Monat == 2 && d.Jahr == 2015; })
+      .attr("fill", color)
+      .attr("cx", function(d,i){   return paddingX + i*zwischen           
+      })
+      .attr ("cy", function(d){   return paddingY+  abstand(2)})
+      .attr("r", radius)
+      
+
+
+  var circles2015_Mar = vis.selectAll("circles")
+      .data(json)
+      .enter()
+      .append("circle")
+      .filter(function(d){ return d.Monat == 3 && d.Jahr == 2015; })
+      .attr("fill", color)
+      .attr("cx", function(d,i){   return paddingX + i*zwischen           
+      })
+      .attr ("cy", function(d){   return paddingY+  abstand(3)})
+      .attr("r", radius)
+
+  var circles2015_Apr = vis.selectAll("circles")
+      .data(json)
+      .enter()
+      .append("circle")
+      .filter(function(d){ return d.Monat == 4 && d.Jahr == 2015; })
+      .attr("fill", color)
+      .attr("cx", function(d,i){   return paddingX + i*zwischen})
+      .attr ("cy", function(d){   return paddingY+  abstand(4)})
+      .attr("r", radius);
+
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){   return paddingY+  abstand(1)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){   return paddingY+  abstand(4)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+console.log(function(){return d.Jahr});
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -60 + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(2.5) })
+      .text("2015")
+      .attr("font-family", "Roboto")
+      .attr("font-size", "10px")
+      .attr("fill", colorPathText);
+  
+
+                        
+
+
+     
+// 2014
+
+ var circles2014_Jan = vis.selectAll("circles")
+      .data(json)
+      .enter()
+      .append("circle")
+      .filter(function(d){ return d.Monat == 1 && d.Jahr == 2014; })
+      .attr("fill", color)
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(7)})
+      .attr("r", radius)
+
+   var circles2014_Feb = vis.selectAll("circles")
+      .data(json)
+      .enter()
+      .append("circle")
+      .filter(function(d){ return d.Monat == 2 && d.Jahr == 2014; })
+      .attr("fill", color)
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(8)})
+      .attr("r", radius)
+
+
+  var circles2014_Mar = vis.selectAll("circles")
+      .data(json)
+      .enter()
+      .append("circle")
+      .filter(function(d){ return d.Monat == 3 && d.Jahr == 2014; })
+      .attr("fill", color)
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(9)})
+      .attr("r", radius)
+
+       .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'orange');
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+        })
+
+
+
+   var circles2014_Apr = vis.selectAll("circles")
+      .data(json)
+      .enter()
+      .append("circle")
+      .filter(function(d){ return d.Monat == 4 && d.Jahr == 2014; })
+      .attr("fill", color)
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(10)})
+      .attr("r", radius)
+
+
+  var circles2014_Mai = vis.selectAll("circles")
+      .data(json)
+      .enter()
+      .append("circle")
+      .filter(function(d){ return d.Monat == 5 && d.Jahr == 2014; })
+      .attr("fill", color)
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(11)})
+      .attr("r", radius)
+
+
+  var circles2014_Jun = vis.selectAll("circles")
+      .data(json)
+      .enter()
+      .append("circle")
+      .filter(function(d){ return d.Monat == 6 && d.Jahr == 2014; })
+      .attr("fill", color)
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(12)})
+      .attr("r", radius)
+
+  var circles2014_Jul = vis.selectAll("circles")
+      .data(json)
+      .enter()
+      .append("circle")
+      .filter(function(d){ return d.Monat == 7 && d.Jahr == 2014; })
+      .attr("fill", color)
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(13)})
+      .attr("r", radius)
+
+  var circles2014_Aug = vis.selectAll("circles")
+      .data(json)
+      .enter()
+      .append("circle")
+      .filter(function(d){ return d.Monat == 8 && d.Jahr == 2014; })
+      .attr("fill", color)
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(14)})
+      .attr("r", radius)
+
+
+  var circles2014_Sep = vis.selectAll("circles")
+      .data(json)
+      .enter()
+      .append("circle")
+      .filter(function(d){ return d.Monat == 9 && d.Jahr == 2014; })
+      .attr("fill", color)
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(14)})
+      .attr("r", radius)
+
+
+  var circles2014_Oct = vis.selectAll("circles")
+      .data(json)
+      .enter()
+      .append("circle")
+      .filter(function(d){ return d.Monat == 10 && d.Jahr == 2014; })
+      .attr("fill", color)
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(15)})
+      .attr("r", radius)
+
+  var circles2014_Nov = vis.selectAll("circles")
+      .data(json)
+      .enter()
+      .append("circle")
+      .filter(function(d){ return d.Monat == 11 && d.Jahr == 2014; })
+      .attr("fill", color)
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(16)})
+      .attr("r", radius)
+
+  var circles2014_Dec = vis.selectAll("circles")
+      .data(json)
+      .enter()
+      .append("circle")
+      .filter(function(d){ return d.Monat == 12 && d.Jahr == 2014; })
+      .attr("fill", color)
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(17)})
+      .attr("r", radius)
+
+
+  //Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(7)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(17)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -60 + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(11.5) })
+      .text("2014")
+      .attr("font-family", "Roboto")
+      .attr("font-size", "10px")
+      .attr("fill", colorPathText);
+  
+
+
+
+
+      
+
+
+  
+      /* ----- Style data based on Properties ----- 
+        .style("opacity", function(d) {
+        	console.log(d.properties.Name.length);
+        	return parseInt(d.properties.Name.length) * 2 / 100;
+        })
+
+        /* ----- Style data based on Index ----- 
+        .style('fill', function(d,i) {
+        	if (i < 4) {
+        		return 'pink';
+        	}
+        	else {
+        		return 'blue';
+        	}
+        })
+        .style("stroke-width", "0.5")
+        .style("stroke", "grey")
+
+        /* ------- Mouse Interaction -----
+        .on('mouseover', function(d) {
+        	console.log(d);
+        	d3.select(this).style('fill', 'red');
+        })
+
+        .on('mouseout', function(d) {
+        	console.log(d);
+        	d3.select(this).style('fill', 'blue');
+        })
+
+
+        .style("fill", function(d){
+          console.log(d.properties.Name);
+        })
+
+        .style("fill","blue")
+        .style("opacity", 0.5)
+        .on ("mouseover", function(d){
+          d3.select(this)
+          .style("opacity",1)
+          console.log(d.properties);
+
+        })
+
+        .on ("mouseout",function(d){        
+            d3.select(this)
+            .style("fill", "blue")
+            .style("opacity", 0.5)
+        })
+        .style("stroke", "none") 
+
+
+        var text = d3.select("body")
+                    .append("div")
+                    .attr("id", "bezirk")
+                    .text(function(d){
+                        return d.properties.Name
+                    })
+                    .style("text-align", "left")
+                    .style("font-size", "40pt")
+
+    */
+    });
+
+window.onload = function() {
+  cartodb.createVis('map', 'https://alsinocodeweek.cartodb.com/api/v2/viz/1819ef90-1d0e-11e5-81b9-0e853d047bba/viz.json', {
+            shareable: false,
+            layer_selector: false,
+            title: false,
+            description: false,
+            search: false,
+            tiles_loader: true,
+            center_lat: 0,
+            center_lon: 0,
+            zoom: 2,
+            legends: false,
+            cartodb_logo: false,
+            time_slider: false,
+            zoom: 6,
+            center_lon: 10.447683,
+            center_lat: 51.163375,
+            shareable: false
+        })
+      };
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+<section id="descr">
+<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p> <br>
+<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+</section>
+
+
+<div id='overlay'> Alle UFO - Sichtungen <br> in Deutschland <br>
+<div id='zahlen'>von 1975 bis 2015</div> <div id='additionalInfo'> nach geographischer Lage</div>
+
+</div>
+
+
+<section id='wrapperMap'>
+<div id='map'></div>
+</section>
+
+<section id="descr">
+<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p> <br>
+<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+</section>
+
+<section id='wrapperMap'>
+<div id='map'></div>
+</section>
+
+<section id="foot">
+<a href="http://twitter.com/alsinosko"> Alsino <br> Skowronnek</a><br> &copy2015 <br> picture credits: http://www.google.de/imgres?imgurl=http%3A%2F%2Fdebunker.com%2Fimages2%2FTrent1_Full_400dpi.jpg&imgrefurl=http%3A%2F%2Fdebunker.com%2Ftrent.html&h=2800&w=3833&tbnid=-CXG3ptpFqqyOM%3A&zoom=1&docid=8rcqK5Rpr7biQM&ei=Fv6OVd7MCei07gaJooSYBw&tbm=isch&iact=rc&uact=3&dur=369&page=1&start=0&ndsp=33&ved=0CCAQrQMwAA
+</section>
+
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+</body>
+
+
+</html>

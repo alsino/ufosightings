@@ -1,0 +1,218 @@
+
+body{
+  padding:0;
+  margin: 0;
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+
+p {
+  display: block;
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+  -webkit-margin-start: 0em;
+  -webkit-margin-end: 0em;
+}
+
+/*#heading{
+  display: block;
+  padding: 60px;
+  font-family: sans-serif;
+  text-decoration: underline;
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-size: 6em;
+  text-align: center;
+  background-color: yellow;
+} */
+
+#heading{
+  background-image: url('../img/copy2.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center; 
+  padding: 10%;
+  color: black;
+  font-size: 2em;
+  font-weight: 800;
+  text-align: left;
+  line-height: 1;
+  padding-left: 20%;
+ }
+
+
+ #subheading{
+  font-weight: 200;
+  color: grey;
+ }
+
+#zahlen{
+  color: orange;
+  padding-bottom: 5%;
+  font-weight: 200;
+  margin-right: 70%;
+  font-size: .7em;
+  border-bottom: solid grey 1px;
+}
+
+#additionalInfo{
+  font-size: .5em;
+  color: grey;
+}
+
+#byline{
+  color: black;
+  padding-bottom: 5%;
+  font-size: 0.5em;
+  padding-top: 1%;
+  font-weight: 300;
+  font-family: "freight-text-pro",Georgia,Cambria,"Times New Roman",Times,serif;
+}
+
+#datum{
+  font-size: 1em;
+  color: grey;
+}
+
+
+#descr{
+  padding-left: 35%;
+  padding-right: 35%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  font-family: "freight-text-pro",Georgia,Cambria,"Times New Roman",Times,serif;
+  font-size: 1.1em;
+  text-align: left;
+  letter-spacing: 0.01rem;
+  color: black;
+  line-height: 30px;
+
+}
+
+#canvas{
+background-color: #0f0a0e;
+}
+
+
+#foot{
+  background-color: #0f0a0e;
+  height: 600px;
+  font-weight: bolder;
+  font-size: .8em;
+  text-align: center;
+  color: white;
+  padding-top: 40%;
+ }
+
+
+#overlay{
+  color: white;
+  position: absolute;
+  z-index: 3;
+  font-size: 2em;
+  padding-left: 10%;
+  padding-top: 10%;
+  padding-bottom: 2%;
+}
+
+
+#wrapperMap{
+  background-color: #0f0a0e
+
+}
+
+#map {
+  padding-top: 10%;
+  padding-bottom: 10%;
+  height: 600px;
+  margin-left: 650px;
+  width: 600px;
+  z-index: 1;
+}
+
+.leaflet-container .leaflet-control-attribution {
+  background: black;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat-x: initial;
+  background-repeat-y: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: black;
+  background: black;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat-x: initial;
+  background-repeat-y: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: black;
+  margin: 0;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+}
+
+.leaflet-container a {
+  color: black;
+}
+
+.leaflet-control-attribution, .leaflet-control-scale-line {
+  padding: 0 5px;
+  color: black;
+}
+
+div.cartodb-zoom {
+  position: relative;
+  float: right;
+  display: block;
+  margin: 20px 0 0 20px;
+  width: 28px;
+  border: 2px solid #197575;
+  -moz-box-shadow: black 0 0 4px 2px;
+  background-color: black;
+
+  z-index: 105;
+  border-top-left-radius: 1px;
+  border-top-right-radius: 1px;
+  border-bottom-right-radius: 1px;
+  border-bottom-left-radius: 1px;
+}
+
+div.cartodb-zoom a.zoom_in {
+  border-bottom: 2px solid #197575;
+}
+
+
+div.cartodb-tooltip-content-wrapper {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background: orange;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5FFFFFF, endColorstr=#E5FFFFFF);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5FFFFFF, endColorstr=#E5FFFFFF)";
+  zoom: 1;
+}
+
+div.cartodb-tooltip-content h4 {
+  color: white;
+  font-family: 'Roboto',sans-serif;
+  font-size: 12px;
+}
+
+div.cartodb-tooltip-content p {
+  color: black;
+  font-family: 'Roboto',sans-serif;
+  font-size: 12px;
+}

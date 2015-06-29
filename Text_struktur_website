@@ -1,0 +1,36 @@
+
+Ufo Text:
+
+Einleitung:
+- Ufos? Gibt's doch gar nicht...
+- Wer ein UFO sieht wird meistens als Spinner abgetan
+- Dennoch werden jedes Jahr in Deutschland XX UFOs gesichtet...und das im ganzen Land
+- Die meisten UFO-Sichtungen werden aufgeklärt als identifizierbare Objekte, z.B. Heißluftballons, Meteoriten, Flugzeuge, etc.
+- Manche UFO-Sichtungen werden allerdings auch nie aufgeklärt und bleiben für immer ein Rätsel
+- UFOs im ursprünglichen Sinne sind tatsächlich nur unidentifizierbare Flugobjekte und haben nichts mit Aliens, E.T. etch zu tun
+
+
+Fakten:
+- ca. 3000 UFO Sichtungen in Deutschland seit 1970 (Timeline Grafik -> Sparkline)
+- d.h. im Schnitt werden jede Woche/ jeden Monat XX Ufos gesehen
+- allein in 2015 XXX Sichtungen, top war 2014 mit XXX Sichtungen oder XX % aller Sichtungen -> vgl. mit 1950er Jahren als UFO Hochphase und kalter Krieg (-> Timeline Grafik mit C3.js)
+- die meisten UFOs werden da...da...und da...gesehen -> a) Städte b) PLZ-Gebiete -> Gründe skizzieren: vielleicht Flugplätze, Einflugschneisen, etc. u. a. einzeichnen in Karte / Suchfunktion per PLZ als Lookup / Jahreszahlen als Mini-Buttons unten
+- Die Schilderungen von UFO-Sichtungen können Aufschluss über die gesichteten Gegenstände/ Objekte geben
+- Texte analysieren von 2015 -> Emotionen? -> Sentiment API oder so?
+- Die meisten UFOs sah man im Jahr -> XXX
+- Die meisten UFOs sah man zur Tageszeit -> XXX
+- Die meisten UFOs sah man am Wochentag -> XXX
+- Die meisten UFOS sah man am Tag XX des Monats
+
+Vergleich andere Länder?
+
+
+
+
+d3 Grafik
+- farblich Markieren: Aufgeklärte vs unaufgeklärte Sichtungen (oder durch Opacity)
+
+
+I
+
+

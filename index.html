@@ -112,7 +112,7 @@ var height = 2500;
 
 
 console.log(json.filter(function(d) { return d.Monat==1 && d.Jahr==2015;; })); //Array mit den gefilterten Werten
-console.log(json.filter(function(d) { return d.Monat==1 && d.Jahr==2015;; }).length); // Anzahl der gefilterten Werte im Array
+console.log(json.filter(function(d) { return d.Monat==3 && d.Jahr==2014;; }).length); // Anzahl der gefilterten Werte im Array
 
 
 var Jan = json.filter(function(d,i) { return d.Monat ==1; });
@@ -138,16 +138,25 @@ console.log(d3.min(json, function(d) { return d.Jahr; }));
 console.log(d3.max(json, function(d) { return d.Jahr; }));
 
 
-/*var color =d3.scale.linear()
-            .domain([d3.min(json, function(d) { return d.lat; }),d3.max(json, function(d) { return d.lat; })])
+
+//////////////////
+
+
+//Funktion für Filter als Dateninput in .data()
+function dataInput(month,year){
+    return json.filter(function(d){ return d.Monat == month && d.Jahr == year; });
+  };
+
+
+/*var color2 =d3.scale.linear()
+            .domain([dataInput(2,2000).length, dataInput(3,2014).length])
             .range(["red", "white"]);
 
-    console.log(d3.min(json, function(d) { return d.lat; }));
-    console.log(d3.min(json, function(d) { return d.lng; }));
-    */
+    console.log(d3.max(json.filter(function(d) { return d.Monat==1 && d.Jahr==2015;}).length));
+    //console.log(d3.min(json, function(d) { return d.lng; }));
 
-
-
+    console.log(dataInput(2,2000).length);
+    console.log(dataInput(3,2014).length); */
 
 
 //Padding links und rechts
@@ -167,25 +176,19 @@ var zwischen = 12;
 //Variable für Farbe
 var color = "#197575";
 //var color = "white";
+//var steelblue = d3.lab(52, -4, -32);
+var alt = "orange";
 
 //Variable für path und text Farbe
 var colorPath = "white";
 var colorPathText = "orange";
 
 //Variable für radius
-var radius = 4;
+var radius = 3;
 
 //Variable für font-size Legende orange
-
 var fontSize = 12;
 
-
-//Funktion für Filter als Dateninput in .data()
-function dataInput(month,year){
-    return json.filter(function(d){ return d.Monat == month && d.Jahr == year; });
-  };
-
-console.log(dataInput(12,2012).length);
 
 
 
@@ -193,10 +196,12 @@ console.log(dataInput(12,2012).length);
 /////// 2015 //////
 for (i=1, j=1; i<=4, j<=4; i++, j++){
   vis.selectAll("circles")
-      .data(dataInput(i,2014))
+      .data(dataInput(i,2015))
       .enter()
       .append("circle")
-      .attr("fill", color)
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
@@ -246,7 +251,9 @@ for (i=1, j=7; i<=12, j<=17; i++, j++){
       .data(dataInput(i,2014))
       .enter()
       .append("circle")
-      .attr("fill", color)
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
@@ -297,7 +304,9 @@ for (i=1, j=20; i<=12, j<=31; i++, j++){
       .data(dataInput(i,2013))
       .enter()
       .append("circle")
-      .attr("fill", color)
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
@@ -346,7 +355,10 @@ for (i=1, j=34; i<=12, j<=45; i++, j++){
       .data(dataInput(i,2012))
       .enter()
       .append("circle")
-      .attr("fill", color)
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
@@ -397,7 +409,9 @@ for (i=1, j=48; i<=12, j<=59; i++, j++){
       .data(dataInput(i,2011))
       .enter()
       .append("circle")
-      .attr("fill", color)
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
@@ -445,7 +459,10 @@ for (i=1, j=62; i<=12, j<=73; i++, j++){
       .data(dataInput(i,2010))
       .enter()
       .append("circle")
-      .attr("fill", color)
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
@@ -492,7 +509,9 @@ for (i=1, j=76; i<=12, j<=87; i++, j++){
       .data(dataInput(i,2009))
       .enter()
       .append("circle")
-      .attr("fill", color)
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
@@ -540,7 +559,9 @@ for (i=1, j=90; i<=12, j<=101; i++, j++){
       .data(dataInput(i,2008))
       .enter()
       .append("circle")
-      .attr("fill", color)
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
@@ -588,7 +609,9 @@ for (i=1, j=104; i<=12, j<=115; i++, j++){
       .data(dataInput(i,2007))
       .enter()
       .append("circle")
-      .attr("fill", color)
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
@@ -636,7 +659,9 @@ for (i=1, j=118; i<=12, j<=129; i++, j++){
       .data(dataInput(i,2006))
       .enter()
       .append("circle")
-      .attr("fill", color)
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
@@ -684,7 +709,9 @@ for (i=1, j=132; i<=12, j<=143; i++, j++){
       .data(dataInput(i,2005))
       .enter()
       .append("circle")
-      .attr("fill", color)
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
@@ -733,7 +760,9 @@ for (i=1, j=146; i<=12, j<=157; i++, j++){
       .data(dataInput(i,2004))
       .enter()
       .append("circle")
-      .attr("fill", color)
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
@@ -782,7 +811,9 @@ for (i=1, j=160; i<=12, j<=171; i++, j++){
       .data(dataInput(i,2003))
       .enter()
       .append("circle")
-      .attr("fill", color)
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
@@ -831,7 +862,9 @@ for (i=1, j=174; i<=12, j<=185; i++, j++){
       .data(dataInput(i,2002))
       .enter()
       .append("circle")
-      .attr("fill", color)
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
@@ -881,7 +914,9 @@ for (i=1, j=188; i<=12, j<=199; i++, j++){
       .data(dataInput(i,2001))
       .enter()
       .append("circle")
-      .attr("fill", color)
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
@@ -932,7 +967,9 @@ for (i=1, j=202; i<=12, j<=213; i++, j++){
       .data(dataInput(i,2000))
       .enter()
       .append("circle")
-      .attr("fill", color)
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
@@ -971,9 +1008,6 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
       .attr("fill", colorPathText);
-
-
-
 
 
 

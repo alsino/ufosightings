@@ -219,6 +219,8 @@ for (i=1, j=1; i<=4, j<=4; i++, j++){
           d3.select(this).style('fill', color);
            d3.select(this).attr("r", radius);
         })
+
+    .attr("class", 'toggletest2015')
 };
 
 //Path left
@@ -238,7 +240,15 @@ vis.append("text")
       .text("2015")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText); 
+      .attr("fill", colorPathText)
+
+         .on("click", function(){
+          $('.toggletest2015').toggle(1000) 
+
+    });
+
+
+
 
 
   
@@ -258,6 +268,7 @@ for (i=1, j=7; i<=12, j<=17; i++, j++){
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
+      .attr("class", "toggletest2014")
 
 
        .on('mouseover', function(d) {
@@ -292,7 +303,12 @@ vis.append("text")
       .text("2014")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+
+       .on("click", function(){
+          $('.toggletest2014').toggle(1000) 
+
+    });
 
 
 
@@ -988,6 +1004,7 @@ for (i=1, j=202; i<=12, j<=213; i++, j++){
            d3.select(this).attr("ry", radius);
            d3.select(this).attr("rx", radius);
         })
+
 };
 
 //Path left
@@ -1000,6 +1017,8 @@ vis.append("line")          // attach a line
     .attr("stroke-width",.5)
 
 
+
+
 //Text label year
 vis.append("text")
       .attr("x", function(d,i) {  return paddingX -60 + i*zwischen})
@@ -1009,85 +1028,19 @@ vis.append("text")
       .attr("font-size", fontSize+"px")
       .attr("fill", colorPathText);
 
+/*$('#abouttext').hide();
+      $('#about').click(function(){
+        $('#abouttext').toggle('slow');
 
+      }); */
 
-
-
-
-
-
-
-
-  
+;
 
 
 
 
       
 
-
-  
-      /* ----- Style data based on Properties ----- 
-        .style("opacity", function(d) {
-        	console.log(d.properties.Name.length);
-        	return parseInt(d.properties.Name.length) * 2 / 100;
-        })
-
-        /* ----- Style data based on Index ----- 
-        .style('fill', function(d,i) {
-        	if (i < 4) {
-        		return 'pink';
-        	}
-        	else {
-        		return 'blue';
-        	}
-        })
-        .style("stroke-width", "0.5")
-        .style("stroke", "grey")
-
-        /* ------- Mouse Interaction -----
-        .on('mouseover', function(d) {
-        	console.log(d);
-        	d3.select(this).style('fill', 'red');
-        })
-
-        .on('mouseout', function(d) {
-        	console.log(d);
-        	d3.select(this).style('fill', 'blue');
-        })
-
-
-        .style("fill", function(d){
-          console.log(d.properties.Name);
-        })
-
-        .style("fill","blue")
-        .style("opacity", 0.5)
-        .on ("mouseover", function(d){
-          d3.select(this)
-          .style("opacity",1)
-          console.log(d.properties);
-
-        })
-
-        .on ("mouseout",function(d){        
-            d3.select(this)
-            .style("fill", "blue")
-            .style("opacity", 0.5)
-        })
-        .style("stroke", "none") 
-
-
-        var text = d3.select("body")
-                    .append("div")
-                    .attr("id", "bezirk")
-                    .text(function(d){
-                        return d.properties.Name
-                    })
-                    .style("text-align", "left")
-                    .style("font-size", "40pt")
-
-    */
     });
 
 window.onload = function() {
@@ -1151,6 +1104,8 @@ window.onload = function() {
 <section id="foot">
 <a href="http://twitter.com/alsinosko"> Alsino <br> Skowronnek</a><br> &copy2015 <br> picture credits: http://www.google.de/imgres?imgurl=http%3A%2F%2Fdebunker.com%2Fimages2%2FTrent1_Full_400dpi.jpg&imgrefurl=http%3A%2F%2Fdebunker.com%2Ftrent.html&h=2800&w=3833&tbnid=-CXG3ptpFqqyOM%3A&zoom=1&docid=8rcqK5Rpr7biQM&ei=Fv6OVd7MCei07gaJooSYBw&tbm=isch&iact=rc&uact=3&dur=369&page=1&start=0&ndsp=33&ved=0CCAQrQMwAA
 </section>
+
+<script src='jquery-1.11.2.min.js'></script>
 
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 </body>

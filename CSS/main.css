@@ -93,8 +93,77 @@ p {
 
 }
 
+
+#blind{
+position: absolute;
+width: 100%;
+height: 100%;
+
+}
+
 #canvas{
 background-color: #0f0a0e;
+}
+
+
+.line {
+    fill: none;
+    stroke: url(#line-gradient);
+    stroke-width: 2px;
+}
+
+
+#fadeYears{
+   background-color: black;
+  color: white;
+  position: absolute;
+  z-index: 3;
+  font-size: .8em;
+  border: 2px solid #197575;
+  font-family: 'Roboto',sans-serif;
+  padding: 1%;
+  margin-left: 80%;
+  margin-top: 10%;
+
+}
+
+#toggleMonths{
+  background-color: black;
+  color: white;
+  position: absolute;
+  z-index: 3;
+  font-size: .8em;
+  border: 2px solid #197575;
+  font-family: 'Roboto',sans-serif;
+  padding: 1%;
+  margin-left: 80%;
+  margin-top: 15%;
+}
+
+
+#toggleElse{
+  background-color: black;
+  color: white;
+  position: absolute;
+  z-index: 3;
+  font-size: .8em;
+  border: 2px solid #197575;
+  font-family: 'Roboto',sans-serif;
+  padding: 1%;
+  margin-left: 80%;
+  margin-top: 20%;
+}
+
+#fadeYears:hover{
+color: grey;
+}
+
+#toggleMonths:hover{
+color: grey;
+}
+
+#toggleElse:hover{
+color: grey;
 }
 
 

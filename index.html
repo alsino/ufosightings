@@ -25,7 +25,7 @@
 <section id="heading">
 <big>Im Land der 'UFOs'</big>
 <div id='subheading'>Unbekannte Flugobjekte <br> über Deutschland von </div>
-<div id="zahlen">1970-2015</div> 
+<div id="zahlen">1975-2015</div> 
 <div id='byline'>Alsino Skowronnek<span id='datum'>, FH Potsdam,  Juli 2015</span></div>
 </section>
 
@@ -34,6 +34,11 @@
 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p> <br>
 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 </section>
+<div id="blind"></div>
+<button type="button" id="fadeYears">Sichtungen pro Jahr</button>
+<button type="button" id="toggleMonths">Sichtungen pro Monat</button>
+<button type="button" id="toggleElse">Nur aufgeklärte Fälle zeigen</button>
+
 
 
 
@@ -46,8 +51,10 @@
 <script>
 
 
+
+
 var width  = window.innerWidth;
-var height = 3500;
+var height = 6400;
 
 
  var vis = d3.select("body")
@@ -90,6 +97,9 @@ var Nov = json.filter(function(d,i) { return d.Monat ==12; });
 //console.log(json.filter(function(d,i) { return d.Jahr ==2015; }));
 
 var j2015 = json.filter(function(d,i) { return d.Jahr ==2015; });
+var j2014 = json.filter(function(d,i) { return d.Jahr ==2014; });
+
+console.log(j2015);
 
 
 console.log(d3.min(json, function(d) { return d.Jahr; }));
@@ -118,8 +128,8 @@ function dataInput(month,year){
 
 
 //Padding links und rechts
-var paddingX = 200;
-var paddingY = 200;
+var paddingX = 400;
+var paddingY = 400;
 
 
 // Variable definieren für y-Abstand zwischen den Reihen
@@ -166,6 +176,26 @@ var y2015 = console.log(x2015[0].Jahr);
 var y2014 = console.log(x2014[0].Jahr); */
 
 
+  
+//Color gradient 
+ vis.append("linearGradient")
+      .attr("id", "line-gradient")
+      .attr("gradientUnits", "userSpaceOnUse")
+    .selectAll("stop")
+      .data([
+        {offset: "0%", color: "#197575"},
+        {offset: "30%", color: "gray"},
+        {offset: "80%", color: "orange"}
+      ])
+    .enter().append("stop")
+      .attr("offset", function(d) { return d.offset; })
+      .attr("stop-color", function(d) { return d.color; });
+
+
+
+
+
+
 
 /////// 2015 //////Points
 for (i=1, j=1; i<=4, j<=4; i++, j++){
@@ -195,62 +225,10 @@ for (i=1, j=1; i<=4, j<=4; i++, j++){
            d3.select(this).attr("r", radius);
         })
 
-    .attr("class", "toggletest2015")
+    .attr("class", "points")
 
-
-  
   };
 
-///Ordering
-/*
-var numbers = [4, 2, 5, 1, 3];
-
-numbers.sort(function(a, b) {
-  return a - b;
-});
-
-console.log(numbers);
-
-
-
-function compare(a, b) {
-  if (a is less than b by some ordering criterion) {
-    return -1;
-  }
-  if (a is greater than b by the ordering criterion) {
-    return 1;
-  }
-  // a must be equal to b
-  return 0;
-}
-
-
-
-
-console.log(dataInput(1,2015));
-
-var a = json.filter(function(d){ return d.Identifikation == ""; }) ==1;
-var b = json.filter(function(d){ return d.Identifikation != ""; }) ==0;
-
-function returnValue(){
-  if 
-}
-
-dataInput(1,2015).sort(function(a, b) {
-  return b-a;
-});
-
-console.log(dataInput(1,2015));
-
-
-
-
-
-
-   function sortArray(a,b){
-      return a-b;
-    };
-    */
 
 
 //Path left
@@ -263,6 +241,8 @@ vis.append("line")          // attach a line
     .attr("stroke-width",.5)
 
 
+ 
+
 //Text label year
 vis.append("text")
       .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
@@ -272,10 +252,9 @@ vis.append("text")
       .attr("font-size", fontSize+"px")
       .attr("fill", colorPathText)
 
-         .on("click", function(){
-            $('.toggletest2015').toggle(1000);
 
-    });
+
+
 
 
 ///Text label months
@@ -287,8 +266,53 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSizeMonths+"px")
       .attr("fill", alt)
+      .attr("class", "labelMonths")
+
  };
 
+
+
+//2014 Pre-layout with Line
+function fireLine() {
+
+//2015 Pre-layout with Line
+var j2015 = json.filter(function(d,i) { return d.Jahr ==2015; });
+vis.append("line")
+      .attr("stroke", "white")
+      .attr("stroke-width", 1)
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+25)
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+25)
+      .transition()
+      .delay(400)
+      .duration(4000)
+      .attr("x2", paddingX+ 2.5*j2015.length)
+
+
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+      var j2014 = json.filter(function(d,i) { return d.Jahr ==2014; });
+  vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(11.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(11.5))
+      .transition()
+      .delay(400)
+      .duration(4000)
+      .attr("x2", paddingX+ 2.5*j2014.length)
+
+
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+
+
+    };
 
 
 
@@ -324,9 +348,14 @@ for (i=1, j=7; i<=12, j<=17; i++, j++){
            d3.select(this).attr("rx", radius);
         })
 
-        .attr("class", 'toggletest2014')
+      .attr("class", "points")
+
+
 
 };
+
+$('.points').hide();
+
 
   //Path left
 vis.append("line")          // attach a line
@@ -362,9 +391,24 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSizeMonths+"px")
       .attr("fill", alt)
+      .attr("class", "labelMonths")
+
  };
 
 
+
+
+
+
+//2013 Pre-layout with Line
+var j2013 = json.filter(function(d,i) { return d.Jahr ==2013; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(25.5))
+      .attr("x2", paddingX+ 2.5*j2013.length)
+      .attr ("y2", paddingY+abstand(25.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
 
 
 
@@ -396,6 +440,8 @@ for (i=1, j=20; i<=12, j<=31; i++, j++){
            d3.select(this).attr("ry", radius);
            d3.select(this).attr("rx", radius);
         })
+
+    .attr("class", "points")
 };
 
 //Path left
@@ -428,7 +474,21 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSizeMonths+"px")
       .attr("fill", alt)
+      .attr("class", "labelMonths")
+
  };
+
+
+
+//2012 Pre-layout with Line
+var j2012 = json.filter(function(d,i) { return d.Jahr ==2012; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(39.5))
+      .attr("x2", paddingX+ 2.5*j2012.length)
+      .attr ("y2", paddingY+abstand(39.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
 
 
 
@@ -460,6 +520,8 @@ for (i=1, j=34; i<=12, j<=45; i++, j++){
            d3.select(this).attr("ry", radius);
            d3.select(this).attr("rx", radius);
         })
+
+    .attr("class", "points")
 };
 
 //Path left
@@ -491,9 +553,21 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSizeMonths+"px")
       .attr("fill", alt)
+      .attr("class", "labelMonths")
+
  };
 
 
+
+//2011 Pre-layout with Line
+var j2011 = json.filter(function(d,i) { return d.Jahr ==2011; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(53.5))
+      .attr("x2", paddingX+ 2.5*j2011.length)
+      .attr ("y2", paddingY+abstand(53.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
 
 
 
@@ -526,6 +600,8 @@ for (i=1, j=48; i<=12, j<=59; i++, j++){
            d3.select(this).attr("ry", radius);
            d3.select(this).attr("rx", radius);
         })
+
+    .attr("class", "points")
 };
 
 //Path left
@@ -557,7 +633,21 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSizeMonths+"px")
       .attr("fill", alt)
+      .attr("class", "labelMonths")
+
  };
+
+
+
+//2010 Pre-layout with Line
+var j2010 = json.filter(function(d,i) { return d.Jahr ==2010; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(67.5))
+      .attr("x2", paddingX+ 2.5*j2010.length)
+      .attr ("y2", paddingY+abstand(67.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
 
 
 
@@ -590,6 +680,10 @@ for (i=1, j=62; i<=12, j<=73; i++, j++){
            d3.select(this).attr("ry", radius);
            d3.select(this).attr("rx", radius);
         })
+
+        .attr("class", "points")
+
+
 };
 
 //Path left
@@ -621,7 +715,23 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSizeMonths+"px")
       .attr("fill", alt)
+      .attr("class", "labelMonths")
+
  };
+
+
+
+
+//2009 Pre-layout with Line
+var j2009 = json.filter(function(d,i) { return d.Jahr ==2009; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(81.5))
+      .attr("x2", paddingX+ 2.5*j2009.length)
+      .attr ("y2", paddingY+abstand(81.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
 
 
 
@@ -652,6 +762,9 @@ for (i=1, j=76; i<=12, j<=87; i++, j++){
            d3.select(this).attr("ry", radius);
            d3.select(this).attr("rx", radius);
         })
+
+            .attr("class", "points")
+
 };
 
 //Path left
@@ -683,10 +796,22 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSizeMonths+"px")
       .attr("fill", alt)
+      .attr("class", "labelMonths")
+
  };
 
 
 
+
+//2008 Pre-layout with Line
+var j2008 = json.filter(function(d,i) { return d.Jahr ==2008; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(95.5))
+      .attr("x2", paddingX+ 2.5*j2008.length)
+      .attr ("y2", paddingY+abstand(95.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
 
 
 
@@ -717,6 +842,9 @@ for (i=1, j=90; i<=12, j<=101; i++, j++){
            d3.select(this).attr("ry", radius);
            d3.select(this).attr("rx", radius);
         })
+
+            .attr("class", "points")
+
 };
 
 //Path left
@@ -748,7 +876,21 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSizeMonths+"px")
       .attr("fill", alt)
+      .attr("class", "labelMonths")
+
  };
+
+
+
+//2007 Pre-layout with Line
+var j2007 = json.filter(function(d,i) { return d.Jahr ==2007; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(109.5))
+      .attr("x2", paddingX+ 2.5*j2007.length)
+      .attr ("y2", paddingY+abstand(109.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
 
 
 
@@ -779,6 +921,9 @@ for (i=1, j=104; i<=12, j<=115; i++, j++){
            d3.select(this).attr("ry", radius);
            d3.select(this).attr("rx", radius);
         })
+
+            .attr("class", "points")
+
 };
 
 //Path left
@@ -810,7 +955,21 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSizeMonths+"px")
       .attr("fill", alt)
+      .attr("class", "labelMonths")
+
  };
+
+
+
+//2006 Pre-layout with Line
+var j2006 = json.filter(function(d,i) { return d.Jahr ==2006; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(123.5))
+      .attr("x2", paddingX+ 2.5*j2006.length)
+      .attr ("y2", paddingY+abstand(123.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
 
 
 
@@ -841,6 +1000,9 @@ for (i=1, j=118; i<=12, j<=129; i++, j++){
            d3.select(this).attr("ry", radius);
            d3.select(this).attr("rx", radius);
         })
+
+            .attr("class", "points")
+
 };
 
 //Path left
@@ -872,8 +1034,21 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSizeMonths+"px")
       .attr("fill", alt)
+      .attr("class", "labelMonths")
+
  };
 
+
+
+//2005 Pre-layout with Line
+var j2005 = json.filter(function(d,i) { return d.Jahr ==2005; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(137.5))
+      .attr("x2", paddingX+ 2.5*j2005.length)
+      .attr ("y2", paddingY+abstand(137.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
 
 
         /////// 2005 //////
@@ -903,6 +1078,9 @@ for (i=1, j=132; i<=12, j<=143; i++, j++){
            d3.select(this).attr("ry", radius);
            d3.select(this).attr("rx", radius);
         })
+
+            .attr("class", "points")
+
 };
 
 //Path left
@@ -934,7 +1112,22 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSizeMonths+"px")
       .attr("fill", alt)
+      .attr("class", "labelMonths")
+
  };
+
+
+
+
+//2004 Pre-layout with Line
+var j2004 = json.filter(function(d,i) { return d.Jahr ==2004; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(151.5))
+      .attr("x2", paddingX+ 2.5*j2004.length)
+      .attr ("y2", paddingY+abstand(151.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
 
 
 
@@ -965,6 +1158,10 @@ for (i=1, j=146; i<=12, j<=157; i++, j++){
            d3.select(this).attr("ry", radius);
            d3.select(this).attr("rx", radius);
         })
+      
+      .attr("class", "points")
+
+
 };
 
 //Path left
@@ -997,9 +1194,20 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSizeMonths+"px")
       .attr("fill", alt)
+      .attr("class", "labelMonths")
+
  };
 
 
+//2003 Pre-layout with Line
+var j2003 = json.filter(function(d,i) { return d.Jahr ==2003; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(165.5))
+      .attr("x2", paddingX+ 2.5*j2003.length)
+      .attr ("y2", paddingY+abstand(165.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
 
 
 /////// 2003 //////
@@ -1029,6 +1237,9 @@ for (i=1, j=160; i<=12, j<=171; i++, j++){
            d3.select(this).attr("ry", radius);
            d3.select(this).attr("rx", radius);
         })
+
+      .attr("class", "points")
+
 };
 
 //Path left
@@ -1061,8 +1272,20 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSizeMonths+"px")
       .attr("fill", alt)
+      .attr("class", "labelMonths")
+
  };
 
+
+//2002 Pre-layout with Line
+var j2002 = json.filter(function(d,i) { return d.Jahr ==2002; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(179.5))
+      .attr("x2", paddingX+ 2.5*j2002.length)
+      .attr ("y2", paddingY+abstand(179.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
 
 
 
@@ -1093,6 +1316,9 @@ for (i=1, j=174; i<=12, j<=185; i++, j++){
            d3.select(this).attr("ry", radius);
            d3.select(this).attr("rx", radius);
         })
+
+          .attr("class", "points")
+
 };
 
 //Path left
@@ -1124,9 +1350,20 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSizeMonths+"px")
       .attr("fill", alt)
+      .attr("class", "labelMonths")
+
  };
 
 
+//2001 Pre-layout with Line
+var j2001 = json.filter(function(d,i) { return d.Jahr ==2001; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(193.5))
+      .attr("x2", paddingX+ 2.5*j2001.length)
+      .attr ("y2", paddingY+abstand(193.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
 
 
 /////// 2001 //////
@@ -1156,6 +1393,9 @@ for (i=1, j=188; i<=12, j<=199; i++, j++){
            d3.select(this).attr("ry", radius);
            d3.select(this).attr("rx", radius);
         })
+
+          .attr("class", "points")
+
 };
 
 //Path left
@@ -1187,9 +1427,21 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSizeMonths+"px")
       .attr("fill", alt)
+      .attr("class", "labelMonths")
+
  };
 
 
+
+//2000 Pre-layout with Line
+var j2000 = json.filter(function(d,i) { return d.Jahr ==2000; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(207.5))
+      .attr("x2", paddingX+ 2.5*j2000.length)
+      .attr ("y2", paddingY+abstand(207.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
 
 
 
@@ -1208,9 +1460,6 @@ for (i=1, j=202; i<=12, j<=213; i++, j++){
       .attr("r", radius)
 
 
-
-
-
          .on('mouseover', function(d) {
           console.log(d);
           d3.select(this).style('fill', 'white');
@@ -1225,6 +1474,7 @@ for (i=1, j=202; i<=12, j<=213; i++, j++){
            d3.select(this).attr("rx", radius);
         })
 
+      .attr("class", "points")
 
 
 };
@@ -1261,9 +1511,21 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSizeMonths+"px")
       .attr("fill", alt)
+      .attr("class", "labelMonths")
+
  };
 
 
+
+//1999 Pre-layout with Line
+var j1999 = json.filter(function(d,i) { return d.Jahr ==1999; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(221.5))
+      .attr("x2", paddingX+ 2.5*j1999.length)
+      .attr ("y2", paddingY+abstand(221.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
 
 
 /////// 1999 //////
@@ -1282,8 +1544,6 @@ for (i=1, j=216; i<=12, j<=227; i++, j++){
 
 
 
-
-
          .on('mouseover', function(d) {
           console.log(d);
           d3.select(this).style('fill', 'white');
@@ -1298,6 +1558,7 @@ for (i=1, j=216; i<=12, j<=227; i++, j++){
            d3.select(this).attr("rx", radius);
         })
 
+      .attr("class", "points")
 
 
 };
@@ -1334,8 +1595,20 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSizeMonths+"px")
       .attr("fill", alt)
+      .attr("class", "labelMonths")
+
  };
 
+
+//1998 Pre-layout with Line
+var j1998 = json.filter(function(d,i) { return d.Jahr ==1998; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(235.5))
+      .attr("x2", paddingX+ 2.5*j1998.length)
+      .attr ("y2", paddingY+abstand(235.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
 
 
 /////// 1998 //////
@@ -1369,6 +1642,8 @@ for (i=1, j=230; i<=12, j<=241; i++, j++){
            d3.select(this).attr("ry", radius);
            d3.select(this).attr("rx", radius);
         })
+
+      .attr("class", "points")
 
 
 
@@ -1406,7 +1681,20 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSizeMonths+"px")
       .attr("fill", alt)
+      .attr("class", "labelMonths")
+
  };
+
+
+//1997 Pre-layout with Line
+var j1997 = json.filter(function(d,i) { return d.Jahr ==1997; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(249.5))
+      .attr("x2", paddingX+ 2.5*j1997.length)
+      .attr ("y2", paddingY+abstand(249.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
 
 
 /////// 1997 //////
@@ -1441,6 +1729,7 @@ for (i=1, j=244; i<=12, j<=255; i++, j++){
            d3.select(this).attr("rx", radius);
         })
 
+      .attr("class", "points")
 
 
 };
@@ -1477,13 +1766,1912 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSizeMonths+"px")
       .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
+//1996 Pre-layout with Line
+var j1996 = json.filter(function(d,i) { return d.Jahr ==1996; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(263.5))
+      .attr("x2", paddingX+ 2.5*j1996.length)
+      .attr ("y2", paddingY+abstand(263.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+/////// 1996 //////
+for (i=1, j=258; i<=12, j<=269; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1996))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+      .attr("class", "points")
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(258)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(269)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(263.5) })
+      .text("1996")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=258; h<=12, j<=269; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
+//1995 Pre-layout with Line
+var j1995 = json.filter(function(d,i) { return d.Jahr ==1995; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(277.5))
+      .attr("x2", paddingX+ 2.5*j1995.length)
+      .attr ("y2", paddingY+abstand(277.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+
+ /////// 1995 //////
+for (i=1, j=272; i<=12, j<=283; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1995))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+      .attr("class", "points")
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(272)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(283)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(277.5) })
+      .text("1995")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=272; h<=12, j<=283; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
+//1994 Pre-layout with Line
+var j1994 = json.filter(function(d,i) { return d.Jahr ==1994; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(291.5))
+      .attr("x2", paddingX+ 2.5*j1994.length)
+      .attr ("y2", paddingY+abstand(291.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+ /////// 1994 //////
+for (i=1, j=286; i<=12, j<=297; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1994))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+      .attr("class", "points")
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(286)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(297)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(291.5) })
+      .text("1994")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=286; h<=12, j<=297; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
+//1993 Pre-layout with Line
+var j1993 = json.filter(function(d,i) { return d.Jahr ==1993; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(305.5))
+      .attr("x2", paddingX+ 2.5*j1993.length)
+      .attr ("y2", paddingY+abstand(305.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+
+  /////// 1993 //////
+for (i=1, j=300; i<=12, j<=311; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1993))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+      .attr("class", "points")
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(300)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(311)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(305.5) })
+      .text("1993")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=300; h<=12, j<=311; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
+//1992 Pre-layout with Line
+var j1992 = json.filter(function(d,i) { return d.Jahr ==1992; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(319.5))
+      .attr("x2", paddingX+ 2.5*j1992.length)
+      .attr ("y2", paddingY+abstand(319.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+   /////// 1992 //////
+for (i=1, j=314; i<=12, j<=325; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1992))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+      .attr("class", "points")
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(314)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(325)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(319.5) })
+      .text("1992")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=314; h<=12, j<=325; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
+//1991 Pre-layout with Line
+var j1991 = json.filter(function(d,i) { return d.Jahr ==1991; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(333.5))
+      .attr("x2", paddingX+ 2.5*j1991.length)
+      .attr ("y2", paddingY+abstand(333.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+   /////// 1991 //////
+for (i=1, j=328; i<=12, j<=339; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1991))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+      .attr("class", "points")
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(328)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(339)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(333.5) })
+      .text("1991")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=328; h<=12, j<=339; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
+//1990 Pre-layout with Line
+var j1990 = json.filter(function(d,i) { return d.Jahr ==1990; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(347.5))
+      .attr("x2", paddingX+ 2.5*j1990.length)
+      .attr ("y2", paddingY+abstand(347.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+   /////// 1990 //////
+for (i=1, j=342; i<=12, j<=353; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1990))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+      .attr("class", "points")
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(342)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(353)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(347.5) })
+      .text("1990")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=342; h<=12, j<=353; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
+//1989 Pre-layout with Line
+var j1989 = json.filter(function(d,i) { return d.Jahr ==1989; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(361.5))
+      .attr("x2", paddingX+ 2.5*j1989.length)
+      .attr ("y2", paddingY+abstand(361.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+   /////// 1989 //////
+for (i=1, j=356; i<=12, j<=367; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1989))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+      .attr("class", "points")
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(356)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(367)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(361.5) })
+      .text("1989")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=356; h<=12, j<=367; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
  };
 
 
 
+//1988 Pre-layout with Line
+var j1988 = json.filter(function(d,i) { return d.Jahr ==1988; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(375.5))
+      .attr("x2", paddingX+ 2.5*j1988.length)
+      .attr ("y2", paddingY+abstand(375.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+   /////// 1988 //////
+for (i=1, j=370; i<=12, j<=381; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1988))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
 
 
 
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+      .attr("class", "points")
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(370)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(381)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(375.5) })
+      .text("1988")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=370; h<=12, j<=381; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
+//1987 Pre-layout with Line
+var j1987 = json.filter(function(d,i) { return d.Jahr ==1987; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(389.5))
+      .attr("x2", paddingX+ 2.5*j1987.length)
+      .attr ("y2", paddingY+abstand(389.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+    /////// 1987 //////
+for (i=1, j=384; i<=12, j<=395; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1987))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+      .attr("class", "points")
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(384)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(395)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(389.5) })
+      .text("1987")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=384; h<=12, j<=395; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
+//1986 Pre-layout with Line
+var j1986 = json.filter(function(d,i) { return d.Jahr ==1986; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(403.5))
+      .attr("x2", paddingX+ 2.5*j1986.length)
+      .attr ("y2", paddingY+abstand(403.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+     /////// 1986 //////
+for (i=1, j=398; i<=12, j<=409; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1986))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+      .attr("class", "points")
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(398)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(409)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(403.5) })
+      .text("1986")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=398; h<=12, j<=409; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
+
+//1985 Pre-layout with Line
+var j1985 = json.filter(function(d,i) { return d.Jahr ==1985; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(417.5))
+      .attr("x2", paddingX+ 2.5*j1985.length)
+      .attr ("y2", paddingY+abstand(417.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+     /////// 1985 //////
+for (i=1, j=412; i<=12, j<=423; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1985))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+      .attr("class", "points")
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(412)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(423)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(417.5) })
+      .text("1985")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=412; h<=12, j<=423; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
+//1984 Pre-layout with Line
+var j1984 = json.filter(function(d,i) { return d.Jahr ==1984; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(431.5))
+      .attr("x2", paddingX+ 2.5*j1984.length)
+      .attr ("y2", paddingY+abstand(431.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+      /////// 1984 //////
+for (i=1, j=426; i<=12, j<=437; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1984))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+      .attr("class", "points")
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(426)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(437)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(431.5) })
+      .text("1984")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=426; h<=12, j<=437; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
+//1983 Pre-layout with Line
+var j1983 = json.filter(function(d,i) { return d.Jahr ==1983; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(445.5))
+      .attr("x2", paddingX+ 2.5*j1983.length)
+      .attr ("y2", paddingY+abstand(445.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+      /////// 1983 //////
+for (i=1, j=440; i<=12, j<=451; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1983))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+      .attr("class", "points")
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(440)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(451)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(445.5) })
+      .text("1983")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=440; h<=12, j<=451; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
+
+//1982 Pre-layout with Line
+var j1982 = json.filter(function(d,i) { return d.Jahr ==1982; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(459.5))
+      .attr("x2", paddingX+ 2.5*j1982.length)
+      .attr ("y2", paddingY+abstand(459.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+
+      /////// 1982 //////
+for (i=1, j=454; i<=12, j<=465; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1982))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+      .attr("class", "points")
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(454)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(465)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(459.5) })
+      .text("1982")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=454; h<=12, j<=465; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
+
+//1981 Pre-layout with Line
+var j1981 = json.filter(function(d,i) { return d.Jahr ==1981; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(473.5))
+      .attr("x2", paddingX+ 2.5*j1981.length)
+      .attr ("y2", paddingY+abstand(473.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+
+      /////// 1981 //////
+for (i=1, j=468; i<=12, j<=479; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1981))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+      .attr("class", "points")
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(468)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(479)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(473.5) })
+      .text("1981")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=468; h<=12, j<=479; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
+
+//1980 Pre-layout with Line
+var j1980 = json.filter(function(d,i) { return d.Jahr ==1980; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(487.5))
+      .attr("x2", paddingX+ 2.5*j1980.length)
+      .attr ("y2", paddingY+abstand(487.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+      /////// 1980 //////
+for (i=1, j=482; i<=12, j<=493; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1980))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+      .attr("class", "points")
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(482)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(493)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(487.5) })
+      .text("1980")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=482; h<=12, j<=493; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
+//1979 Pre-layout with Line
+var j1979 = json.filter(function(d,i) { return d.Jahr ==1979; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(501.5))
+      .attr("x2", paddingX+ 2.5*j1979.length)
+      .attr ("y2", paddingY+abstand(501.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+ /////// 1979 //////
+for (i=1, j=496; i<=12, j<=507; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1979))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+      .attr("class", "points")
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(496)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(507)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(501.5) })
+      .text("1979")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=496; h<=12, j<=507; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
+//1978 Pre-layout with Line
+var j1978 = json.filter(function(d,i) { return d.Jahr ==1978; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(515.5))
+      .attr("x2", paddingX+ 2.5*j1978.length)
+      .attr ("y2", paddingY+abstand(515.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+ /////// 1978 //////
+for (i=1, j=510; i<=12, j<=521; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1978))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+      .attr("class", "points")
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(510)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(521)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(515.5) })
+      .text("1978")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=510; h<=12, j<=521; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
+
+//1977 Pre-layout with Line
+var j1977 = json.filter(function(d,i) { return d.Jahr ==1977; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(529.5))
+      .attr("x2", paddingX+ 2.5*j1977.length)
+      .attr ("y2", paddingY+abstand(529.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+ /////// 1977 //////
+for (i=1, j=524; i<=12, j<=535; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1977))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+      .attr("class", "points")
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(524)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(535)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(529.5) })
+      .text("1977")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=524; h<=12, j<=535; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
+
+//1976 Pre-layout with Line
+var j1976 = json.filter(function(d,i) { return d.Jahr ==1976; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(543.5))
+      .attr("x2", paddingX+ 2.5*j1976.length)
+      .attr ("y2", paddingY+abstand(543.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+
+ /////// 1976 //////
+for (i=1, j=538; i<=12, j<=549; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1976))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+      .attr("class", "points")
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(538)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(549)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(543.5) })
+      .text("1976")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=538; h<=12, j<=549; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
+//1975 Pre-layout with Line
+var j1975 = json.filter(function(d,i) { return d.Jahr ==1975; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(557.5))
+      .attr("x2", paddingX+ 2.5*j1975.length)
+      .attr ("y2", paddingY+abstand(557.5))
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+ /////// 1975 //////
+for (i=1, j=552; i<=12, j<=563; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1975))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+      .attr("class", "points")
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(552)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(563)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(557.5) })
+      .text("1975")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=552; h<=12, j<=563; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+$('.points').hide();
+$('.labelMonths').hide();
+$("#toggleMonths").on("click", function(){
+    $(".points").show();
+    $('.line').show();
+    $('.labelMonths').show();
+    $('.line').hide();
+
+});
+
+
+//Need to attach to #canvas element, not window!!! -> FIX!!
+$("#fadeYears").on ("click",function() {
+    console.log('Event Fired');
+    $('.points').hide();
+    $('.labelMonths').hide();
+    fireLine();
+    $('.line').hide();
+
+});
 
       
 

@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
 
 
+
 <script src="//use.typekit.net/keb0kek.js"></script>
 <script>try{Typekit.load();}catch(e){}</script>
 
@@ -46,7 +47,7 @@
 
 
 var width  = window.innerWidth;
-var height = 2500;
+var height = 3500;
 
 
  var vis = d3.select("body")
@@ -56,50 +57,7 @@ var height = 2500;
           .attr("id","canvas");
 
 
-      /*---Mouse Interaction ---
-      .on('mouseover', function(data1) {
-          console.log(data1);
-          d3.select(this).style('fill','red');
-          d3.select(this).attr("opacity", 0.4);
-          d3.select(this).append("circle");
-          d3.select(this).attr("cy","200px");
-          d3.select(this).attr("r",data1*2);
-        })
-
-      .on('mouseout', function(data1) {
-          console.log(data1);
-          d3.select(this).style('fill', color);
-        })                                        
-
-      vis.selectAll("circles")
-      .data(data2)
-      .enter()
-      .append("circle")
-      .attr("fill", color)
-      .attr("cy","300px")
-      .attr("r","10px")
-      .attr("opacity", 0.5)
-      .attr("r", function(data2){
-          return (data2/1.1);
-      })
-      .attr("cx", function(data2){
-          return (data2*20);
-      })
-
-      vis.selectAll("circles")
-      .data(data3)
-      .enter()
-      .append("circle")
-      .attr("fill", color)
-      .attr("cy","400px")
-      .attr("r","10px")
-      .attr("opacity", 0.5)
-      .attr("r", function(data3){
-          return (data3/1.1);
-      })
-      .attr("cx", function(data3){
-          return (data3*20);
-      })                                */
+     
     
 
 /* --- How to use json with D3 --- */
@@ -109,7 +67,7 @@ var height = 2500;
                                           //console.log(json.dreams[1]);  // is the second array in the "dreams" object that we want to access
                                           //console.log(json.dreams[1].daytime); // accesses the key of the second array with the value "daytime"
 
-
+console.log(json);
 
 console.log(json.filter(function(d) { return d.Monat==1 && d.Jahr==2015;; })); //Array mit den gefilterten Werten
 console.log(json.filter(function(d) { return d.Monat==3 && d.Jahr==2014;; }).length); // Anzahl der gefilterten Werte im Array
@@ -171,13 +129,14 @@ var abstand = function multiply (value){
 }
 
 //Variable für x-Abstand zwischen den Punkten
-var zwischen = 12;
+var zwischen = 10;
 
 //Variable für Farbe
 var color = "#197575";
+//var color ="red";
 //var color = "white";
 //var steelblue = d3.lab(52, -4, -32);
-var alt = "orange";
+var alt = "white";
 
 //Variable für path und text Farbe
 var colorPath = "white";
@@ -188,12 +147,27 @@ var radius = 3;
 
 //Variable für font-size Legende orange
 var fontSize = 12;
+var fontSizeMonths = 9.5;
+
+
+//Scale that translates month number to Jan, Feb, Mär, etc.
+var scaleMonth = d3.scale.linear()
+                .domain([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14])
+                .range(["off1","off2","Jan","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"]);
+
+// y-Abstand labels year
+var labelPad = 100;
+
+
+/*var x2015 = json.filter(function(d){ return d.Jahr == 2015;});
+var x2014 = json.filter(function(d){ return d.Jahr == 2014;});
+
+var y2015 = console.log(x2015[0].Jahr);
+var y2014 = console.log(x2014[0].Jahr); */
 
 
 
-
-
-/////// 2015 //////
+/////// 2015 //////Points
 for (i=1, j=1; i<=4, j<=4; i++, j++){
   vis.selectAll("circles")
       .data(dataInput(i,2015))
@@ -208,6 +182,7 @@ for (i=1, j=1; i<=4, j<=4; i++, j++){
       .attr("r", radius)
 
 
+
        .on('mouseover', function(d) {
           console.log(d);
           d3.select(this).style('fill', 'white');
@@ -220,8 +195,63 @@ for (i=1, j=1; i<=4, j<=4; i++, j++){
            d3.select(this).attr("r", radius);
         })
 
-    .attr("class", 'toggletest2015')
-};
+    .attr("class", "toggletest2015")
+
+
+  
+  };
+
+///Ordering
+/*
+var numbers = [4, 2, 5, 1, 3];
+
+numbers.sort(function(a, b) {
+  return a - b;
+});
+
+console.log(numbers);
+
+
+
+function compare(a, b) {
+  if (a is less than b by some ordering criterion) {
+    return -1;
+  }
+  if (a is greater than b by the ordering criterion) {
+    return 1;
+  }
+  // a must be equal to b
+  return 0;
+}
+
+
+
+
+console.log(dataInput(1,2015));
+
+var a = json.filter(function(d){ return d.Identifikation == ""; }) ==1;
+var b = json.filter(function(d){ return d.Identifikation != ""; }) ==0;
+
+function returnValue(){
+  if 
+}
+
+dataInput(1,2015).sort(function(a, b) {
+  return b-a;
+});
+
+console.log(dataInput(1,2015));
+
+
+
+
+
+
+   function sortArray(a,b){
+      return a-b;
+    };
+    */
+
 
 //Path left
 vis.append("line")          // attach a line
@@ -235,7 +265,7 @@ vis.append("line")          // attach a line
 
 //Text label year
 vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -60 + i*zwischen})
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
       .attr("y", function(d) { return paddingY+  abstand(2.5) })
       .text("2015")
       .attr("font-family", "Roboto")
@@ -243,15 +273,22 @@ vis.append("text")
       .attr("fill", colorPathText)
 
          .on("click", function(){
-          $('.toggletest2015').toggle(1000) 
+            $('.toggletest2015').toggle(1000);
 
     });
 
 
+///Text label months
+for (h=1, j=1; h<=4, j<=4; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+ };
 
-
-
-  
 
 
 
@@ -261,14 +298,16 @@ for (i=1, j=7; i<=12, j<=17; i++, j++){
       .data(dataInput(i,2014))
       .enter()
       .append("circle")
-      .attr("fill", function(d){
+      /*.attr("fill", function(d){
         if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
+      })*/
+      .style("fill", function(d){return alt})     
+      .attr("cx", function(d,i){   return paddingX + i*zwischen})
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-      .attr("class", "toggletest2014")
+      .style("opacity", function(d){
+        if (d.Identifikation == "") { return .5} else {return 1};
+      })
 
 
        .on('mouseover', function(d) {
@@ -284,6 +323,9 @@ for (i=1, j=7; i<=12, j<=17; i++, j++){
            d3.select(this).attr("ry", radius);
            d3.select(this).attr("rx", radius);
         })
+
+        .attr("class", 'toggletest2014')
+
 };
 
   //Path left
@@ -298,17 +340,29 @@ vis.append("line")          // attach a line
 
 //Text label year
 vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -60 + i*zwischen})
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
       .attr("y", function(d) { return paddingY+  abstand(11.5) })
       .text("2014")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
       .attr("fill", colorPathText)
 
-       .on("click", function(){
-          $('.toggletest2014').toggle(1000) 
-
+           .on("click", function(){
+          $('.toggletest2014').toggle(1500) 
     });
+    
+
+
+///Text label months
+for (h=1, j=7; h<=12, j<=17; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+ };
 
 
 
@@ -356,12 +410,25 @@ vis.append("line")          // attach a line
 
 //Text label year
 vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -60 + i*zwischen})
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
       .attr("y", function(d) { return paddingY+  abstand(25.5) })
       .text("2013")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
       .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=20; h<=12, j<=31; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+ };
 
 
 
@@ -407,12 +474,25 @@ vis.append("line")          // attach a line
 
 //Text label year
 vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -60 + i*zwischen})
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
       .attr("y", function(d) { return paddingY+  abstand(39.5) })
       .text("2012")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
       .attr("fill", colorPathText);
+
+
+///Text label months
+for (h=1, j=34; h<=12, j<=45; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+ };
+
 
 
 
@@ -460,12 +540,25 @@ vis.append("line")          // attach a line
 
 //Text label year
 vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -60 + i*zwischen})
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
       .attr("y", function(d) { return paddingY+  abstand(53.5) })
       .text("2011")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
       .attr("fill", colorPathText);
+
+
+///Text label months
+for (h=1, j=48; h<=12, j<=59; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+ };
+
 
 
 
@@ -511,12 +604,25 @@ vis.append("line")          // attach a line
 
 //Text label year
 vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -60 + i*zwischen})
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
       .attr("y", function(d) { return paddingY+  abstand(67.5) })
       .text("2010")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
       .attr("fill", colorPathText);
+
+
+///Text label months
+for (h=1, j=62; h<=12, j<=73; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+ };
+
 
 
 /////// 2009 //////
@@ -560,12 +666,27 @@ vis.append("line")          // attach a line
 
 //Text label year
 vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -60 + i*zwischen})
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
       .attr("y", function(d) { return paddingY+  abstand(81.5) })
       .text("2009")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
       .attr("fill", colorPathText);
+
+
+///Text label months
+for (h=1, j=76; h<=12, j<=87; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+ };
+
+
+
 
 
 
@@ -610,12 +731,24 @@ vis.append("line")          // attach a line
 
 //Text label year
 vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -60 + i*zwischen})
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
       .attr("y", function(d) { return paddingY+  abstand(95.5) })
       .text("2008")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
       .attr("fill", colorPathText);
+
+
+///Text label months
+for (h=1, j=90; h<=12, j<=101; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+ };
 
 
 
@@ -660,12 +793,24 @@ vis.append("line")          // attach a line
 
 //Text label year
 vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -60 + i*zwischen})
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
       .attr("y", function(d) { return paddingY+  abstand(109.5) })
       .text("2007")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
       .attr("fill", colorPathText);
+
+
+///Text label months
+for (h=1, j=104; h<=12, j<=115; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+ };
 
 
 
@@ -710,12 +855,24 @@ vis.append("line")          // attach a line
 
 //Text label year
 vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -60 + i*zwischen})
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
       .attr("y", function(d) { return paddingY+  abstand(123.5) })
       .text("2006")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
       .attr("fill", colorPathText);
+
+
+///Text label months
+for (h=1, j=118; h<=12, j<=129; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+ };
 
 
 
@@ -760,13 +917,24 @@ vis.append("line")          // attach a line
 
 //Text label year
 vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -60 + i*zwischen})
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
       .attr("y", function(d) { return paddingY+  abstand(137.5) })
       .text("2005")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
       .attr("fill", colorPathText);
 
+
+///Text label months
+for (h=1, j=132; h<=12, j<=143; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+ };
 
 
 
@@ -811,12 +979,25 @@ vis.append("line")          // attach a line
 
 //Text label year
 vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -60 + i*zwischen})
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
       .attr("y", function(d) { return paddingY+  abstand(151.5) })
       .text("2004")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
       .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=146; h<=12, j<=157; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+ };
 
 
 
@@ -862,12 +1043,25 @@ vis.append("line")          // attach a line
 
 //Text label year
 vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -60 + i*zwischen})
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
       .attr("y", function(d) { return paddingY+  abstand(165.5) })
       .text("2003")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
       .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=160; h<=12, j<=171; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+ };
 
 
 
@@ -913,13 +1107,24 @@ vis.append("line")          // attach a line
 
 //Text label year
 vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -60 + i*zwischen})
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
       .attr("y", function(d) { return paddingY+  abstand(179.5) })
       .text("2002")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
       .attr("fill", colorPathText);
 
+
+///Text label months
+for (h=1, j=174; h<=12, j<=185; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+ };
 
 
 
@@ -965,13 +1170,24 @@ vis.append("line")          // attach a line
 
 //Text label year
 vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -60 + i*zwischen})
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
       .attr("y", function(d) { return paddingY+  abstand(193.5) })
       .text("2001")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
       .attr("fill", colorPathText);
 
+
+///Text label months
+for (h=1, j=188; h<=12, j<=199; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+ };
 
 
 
@@ -991,6 +1207,10 @@ for (i=1, j=202; i<=12, j<=213; i++, j++){
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
 
+
+
+
+
          .on('mouseover', function(d) {
           console.log(d);
           d3.select(this).style('fill', 'white');
@@ -1004,6 +1224,8 @@ for (i=1, j=202; i<=12, j<=213; i++, j++){
            d3.select(this).attr("ry", radius);
            d3.select(this).attr("rx", radius);
         })
+
+
 
 };
 
@@ -1021,20 +1243,244 @@ vis.append("line")          // attach a line
 
 //Text label year
 vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -60 + i*zwischen})
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
       .attr("y", function(d) { return paddingY+  abstand(207.5) })
       .text("2000")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
       .attr("fill", colorPathText);
 
-/*$('#abouttext').hide();
-      $('#about').click(function(){
-        $('#abouttext').toggle('slow');
 
-      }); */
 
-;
+///Text label months
+for (h=1, j=202; h<=12, j<=213; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+ };
+
+
+
+
+/////// 1999 //////
+for (i=1, j=216; i<=12, j<=227; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1999))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(216)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(227)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(221.5) })
+      .text("1999")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=216; h<=12, j<=227; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+ };
+
+
+
+/////// 1998 //////
+for (i=1, j=230; i<=12, j<=241; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1998))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(230)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(241)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(235.5) })
+      .text("1998")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=230; h<=12, j<=241; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+ };
+
+
+/////// 1997 //////
+for (i=1, j=244; i<=12, j<=255; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,1997))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+
+
+         .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+          d3.select(this).attr("ry", radius*2);
+           d3.select(this).attr("rx", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("ry", radius);
+           d3.select(this).attr("rx", radius);
+        })
+
+
+
+};
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(244)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){  return paddingY+  abstand(255)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(249.5) })
+      .text("1997")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText);
+
+
+
+///Text label months
+for (h=1, j=244; h<=12, j<=255; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+ };
+
+
+
 
 
 

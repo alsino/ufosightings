@@ -130,7 +130,7 @@ height: 100%;
   font-family: 'Roboto',sans-serif;
   padding: 1%;
   margin-left: 80%;
-  margin-top: 25%;
+  margin-top: 15%;
 
 
 }
@@ -145,7 +145,7 @@ height: 100%;
   font-family: 'Roboto',sans-serif;
   padding: 1%;
   margin-left: 80%;
-  margin-top: 30%;
+  margin-top: 20%;
 }
 
 
@@ -159,7 +159,7 @@ height: 100%;
   font-family: 'Roboto',sans-serif;
   padding: 1%;
   margin-left: 80%;
-  margin-top: 35%;
+  margin-top: 25%;
 }
 
 #fadeYears:hover{
@@ -201,9 +201,18 @@ color: grey;
   font-family: Roboto;
   font-size: 1.4em;
   fill: orange;
-  color: orange;
-  font-weight: 200;
+  font-weight: 500;
 }
+
+.overlay4{
+  /*font-family: "le-monde-livre-classic-byol";*/
+  font-family: Roboto;
+  font-size: 1.4em;
+  fill: grey;
+  font-weight: 300;
+}
+
+
 
 
 .overlay{

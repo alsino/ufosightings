@@ -23,7 +23,7 @@
 
 
 <section id="heading">
-<big>Im Land der 'UFOs'</big>
+Im Land der 'UFOs'
 <div id='subheading'>Unbekannte Flugobjekte <br> über Deutschland </div>
 <div id="zahlen">von 1975-2015</div> 
 <div id='byline'>Alsino Skowronnek<span id='datum'>, FH Potsdam,  Juli 2015</span></div>
@@ -138,6 +138,13 @@ var height = 6400;
       .attr("y", paddingY/2 +30)
       .text("von 1975-2015")
       .attr("class", "overlay3")
+
+   vis.append("text") /// More styling in CSS ///
+      .attr("x", paddingX-20)
+      .attr("y", paddingY/2 +60)
+      .text("zeitlicher Verlauf")
+      .attr("class", "overlay4")
+
 
 
     

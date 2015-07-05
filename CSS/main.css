@@ -46,15 +46,18 @@ p {
 
 
  #subheading{
+  padding-top: 2%;
+  line-height: 130%;
   font-weight: 200;
   color: grey;
  }
 
 #zahlen{
+  padding-top: 2%;
   color: orange;
   padding-bottom: 5%;
   font-weight: 200;
-  margin-right: 70%;
+  margin-right: 40%;
   font-size: .7em;
   border-bottom: solid grey 1px;
 }
@@ -118,7 +121,7 @@ height: 100%;
 
 
 #fadeYears{
-  background-color: black;
+  background-color: Transparent;
   color: white;
   position: absolute;
   z-index: 3;
@@ -127,14 +130,13 @@ height: 100%;
   font-family: 'Roboto',sans-serif;
   padding: 1%;
   margin-left: 80%;
-  /*margin-top: 10%;*/
-  margin-top: 5500px;
+  margin-top: 25%;
 
 
 }
 
 #toggleMonths{
-  background-color: black;
+  background-color: Transparent;
   color: white;
   position: absolute;
   z-index: 3;
@@ -143,12 +145,12 @@ height: 100%;
   font-family: 'Roboto',sans-serif;
   padding: 1%;
   margin-left: 80%;
-  margin-top: 15%;
+  margin-top: 30%;
 }
 
 
 #toggleElse{
-  background-color: black;
+  background-color: Transparent;
   color: white;
   position: absolute;
   z-index: 3;
@@ -157,7 +159,7 @@ height: 100%;
   font-family: 'Roboto',sans-serif;
   padding: 1%;
   margin-left: 80%;
-  margin-top: 20%;
+  margin-top: 35%;
 }
 
 #fadeYears:hover{
@@ -184,7 +186,27 @@ color: grey;
  }
 
 
-#overlay{
+.overlay2{
+  /*font-family: "le-monde-livre-classic-byol";*/
+  font-family: Roboto;
+  font-size: 1.8em;
+  fill: white;
+  font-weight: 200;
+  position: absolute;
+  z-index: 3;
+}
+
+.overlay3{
+  /*font-family: "le-monde-livre-classic-byol";*/
+  font-family: Roboto;
+  font-size: 1.4em;
+  fill: orange;
+  color: orange;
+  font-weight: 200;
+}
+
+
+.overlay{
   color: white;
   position: absolute;
   z-index: 3;
@@ -193,6 +215,9 @@ color: grey;
   padding-top: 10%;
   padding-bottom: 2%;
 }
+
+
+
 
 
 #wrapperMap{

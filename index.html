@@ -2,7 +2,7 @@
 
 <head>
 <meta charset="utf-8">
-<title> Deutschland sieht UFOs</title>
+<title> Im Land der UFOs</title>
 
 <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
 
@@ -24,8 +24,8 @@
 
 <section id="heading">
 <big>Im Land der 'UFOs'</big>
-<div id='subheading'>Unbekannte Flugobjekte <br> über Deutschland von </div>
-<div id="zahlen">1975-2015</div> 
+<div id='subheading'>Unbekannte Flugobjekte <br> über Deutschland </div>
+<div id="zahlen">von 1975-2015</div> 
 <div id='byline'>Alsino Skowronnek<span id='datum'>, FH Potsdam,  Juli 2015</span></div>
 </section>
 
@@ -34,13 +34,14 @@
 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p> <br>
 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 </section>
-<div id="blind"></div>
-<button type="button" id="fadeYears">Sichtungen pro Jahr</button>
-<button type="button" id="toggleMonths">Sichtungen pro Monat</button>
-<button type="button" id="toggleElse">Aufgeklärte Fälle </button>
 
-
-
+<div id="wrapperViz">
+  <div id="buttons">
+    <button type="button" id="fadeYears">Sichtungen pro Jahr</button>
+    <button type="button" id="toggleMonths">Sichtungen pro Monat</button>
+    <button type="button" id="toggleElse">Aufgeklärte Fälle </button>
+  </div>
+</div>
 
 <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
 <script src="d3/d3.js"></script>
@@ -48,72 +49,12 @@
 
 
 
+
+
 <script>
 
 
-
-
-var width  = window.innerWidth;
-var height = 6400;
-
-
- var vis = d3.select("body")
-          .append("svg")
-          .attr("width", width)
-          .attr("height", height)
-          .attr("id","canvas");
-
-
-     
-    
-
-/* --- How to use json with D3 --- */
-  d3.json("ufos.json", function(json) { 
-  //console.log(json);                      //console.log(json); // "json" is the variable for the whole dataset 
-                                          //console.log(json.dreams) // "dreams" is the name of the object of arrays, that we want to access
-                                          //console.log(json.dreams[1]);  // is the second array in the "dreams" object that we want to access
-                                          //console.log(json.dreams[1].daytime); // accesses the key of the second array with the value "daytime"
-
-console.log(json);
-
-console.log(json.filter(function(d) { return d.Monat==1 && d.Jahr==2015;; })); //Array mit den gefilterten Werten
-console.log(json.filter(function(d) { return d.Monat==3 && d.Jahr==2014;; }).length); // Anzahl der gefilterten Werte im Array
-
-
-var Jan = json.filter(function(d,i) { return d.Monat ==1; });
-var Feb = json.filter(function(d,i) { return d.Monat ==2; });
-var Mar = json.filter(function(d,i) { return d.Monat ==3; });
-var Apr = json.filter(function(d,i) { return d.Monat ==4; });
-var Mai = json.filter(function(d,i) { return d.Monat ==5; });
-var Jun = json.filter(function(d,i) { return d.Monat ==6; });
-var Jul = json.filter(function(d,i) { return d.Monat ==7; });
-var Aug = json.filter(function(d,i) { return d.Monat ==8; });
-var Sep = json.filter(function(d,i) { return d.Monat ==9; });
-var Oct = json.filter(function(d,i) { return d.Monat ==10; });
-var Nov = json.filter(function(d,i) { return d.Monat ==11; });
-var Nov = json.filter(function(d,i) { return d.Monat ==12; });
-
-
-//console.log(json.filter(function(d,i) { return d.Jahr ==2015; }));
-
-var j2015 = json.filter(function(d,i) { return d.Jahr ==2015; });
-var j2014 = json.filter(function(d,i) { return d.Jahr ==2014; });
-
-console.log(j2015);
-
-
-console.log(d3.min(json, function(d) { return d.Jahr; }));
-console.log(d3.max(json, function(d) { return d.Jahr; }));
-
-
-
-//////////////////
-
-
-//Funktion für Filter als Dateninput in .data()
-function dataInput(month,year){
-    return json.filter(function(d){ return d.Monat == month && d.Jahr == year; });
-  };
+///////// Variablen und Filter definieren/////////
 
 
 /*var color2 =d3.scale.linear()
@@ -129,7 +70,7 @@ function dataInput(month,year){
 
 //Padding links und rechts
 var paddingX = 400;
-var paddingY = 400;
+var paddingY = 500;
 
 
 // Variable definieren für y-Abstand zwischen den Reihen
@@ -175,6 +116,74 @@ var delay = 400;
 var duration = 4000;
 
 
+var width  = window.innerWidth;
+var height = 6400;
+
+
+ var vis = d3.select("body")
+          .append("svg")
+          .attr("width", width)
+          .attr("height", height)
+          .attr("id","canvas");
+
+
+  vis.append("text") /// More styling in CSS ///
+      .attr("x", paddingX-20)
+      .attr("y", paddingY/2)
+      .text("Alle UFO - Sichtungen in Deutschland")
+      .attr("class", "overlay2")
+
+   vis.append("text") /// More styling in CSS ///
+      .attr("x", paddingX-20)
+      .attr("y", paddingY/2 +30)
+      .text("von 1975-2015")
+      .attr("class", "overlay3")
+
+
+    
+
+/* --- How to use json with D3 --- */
+  d3.json("ufos.json", function(json) { 
+  //console.log(json);                      //console.log(json); // "json" is the variable for the whole dataset 
+                                          //console.log(json.dreams) // "dreams" is the name of the object of arrays, that we want to access
+                                          //console.log(json.dreams[1]);  // is the second array in the "dreams" object that we want to access
+                                          //console.log(json.dreams[1].daytime); // accesses the key of the second array with the value "daytime"
+
+console.log(json);
+
+console.log(json.filter(function(d) { return d.Monat==1 && d.Jahr==2015;; })); //Array mit den gefilterten Werten
+console.log(json.filter(function(d) { return d.Monat==3 && d.Jahr==2014;; }).length); // Anzahl der gefilterten Werte im Array
+
+
+var Jan = json.filter(function(d,i) { return d.Monat ==1; });
+var Feb = json.filter(function(d,i) { return d.Monat ==2; });
+var Mar = json.filter(function(d,i) { return d.Monat ==3; });
+var Apr = json.filter(function(d,i) { return d.Monat ==4; });
+var Mai = json.filter(function(d,i) { return d.Monat ==5; });
+var Jun = json.filter(function(d,i) { return d.Monat ==6; });
+var Jul = json.filter(function(d,i) { return d.Monat ==7; });
+var Aug = json.filter(function(d,i) { return d.Monat ==8; });
+var Sep = json.filter(function(d,i) { return d.Monat ==9; });
+var Oct = json.filter(function(d,i) { return d.Monat ==10; });
+var Nov = json.filter(function(d,i) { return d.Monat ==11; });
+var Nov = json.filter(function(d,i) { return d.Monat ==12; });
+
+
+//console.log(json.filter(function(d,i) { return d.Jahr ==2015; }));
+
+var j2015 = json.filter(function(d,i) { return d.Jahr ==2015; });
+var j2014 = json.filter(function(d,i) { return d.Jahr ==2014; });
+
+console.log(j2015);
+
+
+console.log(d3.min(json, function(d) { return d.Jahr; }));
+console.log(d3.max(json, function(d) { return d.Jahr; }));
+
+
+
+
+
 
 /*var x2015 = json.filter(function(d){ return d.Jahr == 2015;});
 var x2014 = json.filter(function(d){ return d.Jahr == 2014;});
@@ -183,8 +192,15 @@ var y2015 = console.log(x2015[0].Jahr);
 var y2014 = console.log(x2014[0].Jahr); */
 
 
+
+//Funktion für Filter als Dateninput in .data()
+function dataInput(month,year){
+    return json.filter(function(d){ return d.Monat == month && d.Jahr == year; });
+  };
+
+
   
-//Color gradient for yearly lines
+//Define Color gradient for yearly lines
  vis.append("linearGradient")
       .attr("id", "line-gradient")
       .attr("gradientUnits", "userSpaceOnUse")
@@ -820,8 +836,86 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
-    };
 
+//1979 Pre-layout with Line
+var j1979 = json.filter(function(d,i) { return d.Jahr ==1979; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(501.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(501.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j1979.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1978 Pre-layout with Line
+var j1978 = json.filter(function(d,i) { return d.Jahr ==1978; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(515.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(515.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j1978.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1977 Pre-layout with Line
+var j1977 = json.filter(function(d,i) { return d.Jahr ==1977; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(529.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(529.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j1977.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1976 Pre-layout with Line
+var j1976 = json.filter(function(d,i) { return d.Jahr ==1976; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(543.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(543.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j1976.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1975 Pre-layout with Line
+var j1975 = json.filter(function(d,i) { return d.Jahr ==1975; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(557.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(557.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j1975.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+
+    };
+/// FUNCTION ENDS HERE /////
+// START DOT GRAPH FROM HERE ////
 
 
 /////// 2014 //////
@@ -3382,16 +3476,6 @@ vis.append("text")
  };
 
 
-//1979 Pre-layout with Line
-var j1979 = json.filter(function(d,i) { return d.Jahr ==1979; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(501.5))
-      .attr("x2", paddingX+ 2.5*j1979.length)
-      .attr ("y2", paddingY+abstand(501.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
-
 
  /////// 1979 //////
 for (i=1, j=496; i<=12, j<=507; i++, j++){
@@ -3466,16 +3550,6 @@ vis.append("text")
 
  };
 
-
-//1978 Pre-layout with Line
-var j1978 = json.filter(function(d,i) { return d.Jahr ==1978; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(515.5))
-      .attr("x2", paddingX+ 2.5*j1978.length)
-      .attr ("y2", paddingY+abstand(515.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
 
 
  /////// 1978 //////
@@ -3553,17 +3627,6 @@ vis.append("text")
 
 
 
-//1977 Pre-layout with Line
-var j1977 = json.filter(function(d,i) { return d.Jahr ==1977; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(529.5))
-      .attr("x2", paddingX+ 2.5*j1977.length)
-      .attr ("y2", paddingY+abstand(529.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
-
-
  /////// 1977 //////
 for (i=1, j=524; i<=12, j<=535; i++, j++){
   vis.selectAll("circles")
@@ -3639,17 +3702,6 @@ vis.append("text")
 
 
 
-//1976 Pre-layout with Line
-var j1976 = json.filter(function(d,i) { return d.Jahr ==1976; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(543.5))
-      .attr("x2", paddingX+ 2.5*j1976.length)
-      .attr ("y2", paddingY+abstand(543.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
-
-
 
  /////// 1976 //////
 for (i=1, j=538; i<=12, j<=549; i++, j++){
@@ -3723,17 +3775,6 @@ vis.append("text")
       .attr("class", "labelMonths")
 
  };
-
-
-//1975 Pre-layout with Line
-var j1975 = json.filter(function(d,i) { return d.Jahr ==1975; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(557.5))
-      .attr("x2", paddingX+ 2.5*j1975.length)
-      .attr ("y2", paddingY+abstand(557.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
 
 
  /////// 1975 //////
@@ -3874,7 +3915,7 @@ window.onload = function() {
 </section>
 
 
-<div id='overlay'> Alle UFO - Sichtungen <br> in Deutschland <br>
+<div class='overlay'> Alle UFO - Sichtungen <br> in Deutschland <br>
 <div id='zahlen'>von 1975 bis 2015</div> <div id='additionalInfo'> nach geographischer Lage</div>
 
 </div>

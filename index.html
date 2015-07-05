@@ -70,7 +70,7 @@ Im Land der 'UFOs'
 
 //Padding links und rechts
 var paddingX = 400;
-var paddingY = 500;
+var paddingY = 550;
 
 
 // Variable definieren für y-Abstand zwischen den Reihen
@@ -189,6 +189,13 @@ console.log(d3.max(json, function(d) { return d.Jahr; }));
 
 
 
+var j2014 = json.filter(function(d,i) { return d.Jahr ==2014; });
+var j1976 = json.filter(function(d,i) { return d.Jahr ==1976; });
+console.log(j2014.length);
+console.log(j1976.length);
+
+
+
 
 
 
@@ -227,96 +234,27 @@ function dataInput(month,year){
 
 
 
-/////// 2015 //////Points
-for (i=1, j=1; i<=4, j<=4; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,2015))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-       .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-           d3.select(this).attr("r", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("r", radius);
-        })
-
-    .attr("class", "points")
-
-  };
-
-
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){   return paddingY+  abstand(1)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){   return paddingY+  abstand(4)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
- 
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(2.5) })
-      .text("2015")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText)
-
-
-
-
-
-
-///Text label months
-for (h=1, j=1; h<=4, j<=4; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
 
 //Function to start line animation on click
 function fireLine() {
+
 
 //2015 Pre-layout with Line
 var j2015 = json.filter(function(d,i) { return d.Jahr ==2015; });
 vis.append("line") // -> stroke-width defined in CSS
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+25)
+      .attr ("y1", paddingY+abstand(1.5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+25)
+      .attr ("y2", paddingY+abstand(1.5))
       .transition()
       .delay(delay)
       .duration(duration)
       .attr("x2", paddingX+ 2.5*j2015.length)
       .attr("stroke-linecap", "round")
       .attr("class", "line")
+
+
+
 
 //2014 Pre-layout with Line
       var j2014 = json.filter(function(d,i) { return d.Jahr ==2014; });
@@ -920,28 +858,124 @@ vis.append("line")
 
 
 
+//Make scale for x-Axis
+var Xscale = d3.scale.linear()
+      .domain([0,537])
+      //.domain([j1976.length,j2014.length])
+      .range([0,1358])
+      .nice()
+
+
+ //Make x-Axis
+  var xAxis = d3.svg.axis()
+    .scale(Xscale)
+    .orient("top")
+
+  vis.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate("+paddingX+","+(paddingY-70)+")")
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .call(xAxis)
+
+
+
+
     };
 /// FUNCTION ENDS HERE /////
 // START DOT GRAPH FROM HERE ////
 
 
+
+
+/////// 2015 //////Points
+for (i=1, j=0; i<=4, j<=3; i++, j++){
+  vis.selectAll("circles")
+      .data(dataInput(i,2015))
+      .enter()
+      .append("circle")
+      .attr("fill", function(d){
+        if (d.Identifikation == "") { return alt} else {return color};
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
+      .attr ("cy", function(d){  return paddingY+  abstand(j)})
+      .attr("r", radius)
+
+
+
+       .on('mouseover', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', 'white');
+           d3.select(this).attr("r", radius*4);
+        })
+
+    .on('mouseout', function(d) {
+          console.log(d);
+          d3.select(this).style('fill', color);
+           d3.select(this).attr("r", radius);
+        })
+
+    .attr("class", "points")
+
+  };
+
+
+
+//Path left
+vis.append("line")          // attach a line
+    .style("stroke", colorPath)  // colour the line
+    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
+    .attr("y1", function(d){   return paddingY+  abstand(0)})      // y position of the first end of the line
+    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
+    .attr("y2", function(d){   return paddingY+  abstand(3)})    // y position of the second end of the line
+    .attr("stroke-width",.5)
+
+
+ 
+
+//Text label year
+vis.append("text")
+      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
+      .attr("y", function(d) { return paddingY+  abstand(1.5) })
+      .text("2015")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSize+"px")
+      .attr("fill", colorPathText)
+
+
+
+
+
+
+///Text label months
+for (h=1, j=0; h<=4, j<=3; h++, j++){
+vis.append("text")
+      .attr("x", paddingX -50)
+      .attr("y", paddingY+2+  abstand(j)) 
+      .text(scaleMonth(h))
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeMonths+"px")
+      .attr("fill", alt)
+      .attr("class", "labelMonths")
+
+ };
+
+
 /////// 2014 //////
-for (i=1, j=7; i<=12, j<=17; i++, j++){
+for (i=1, j=6; i<=12, j<=17; i++, j++){
   vis.selectAll("circles")
       .data(dataInput(i,2014))
       .enter()
       .append("circle")
-      /*.attr("fill", function(d){
+      .attr("fill", function(d){
         if (d.Identifikation == "") { return alt} else {return color};
-      })*/
-      .style("fill", function(d){return alt})     
-      .attr("cx", function(d,i){   return paddingX + i*zwischen})
+      })
+      .attr("cx", function(d,i){   return paddingX + i*zwischen            
+      })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-      .style("opacity", function(d){
-        if (d.Identifikation == "") { return .5} else {return 1};
-      })
-
 
        .on('mouseover', function(d) {
           console.log(d);
@@ -970,7 +1004,7 @@ $('.points').hide();
 vis.append("line")          // attach a line
     .style("stroke", colorPath)  // colour the line
     .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(7)})      // y position of the first end of the line
+    .attr("y1", function(d){  return paddingY+  abstand(6)})      // y position of the first end of the line
     .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
     .attr("y2", function(d){  return paddingY+  abstand(17)})    // y position of the second end of the line
     .attr("stroke-width",.5)
@@ -992,7 +1026,7 @@ vis.append("text")
 
 
 ///Text label months
-for (h=1, j=7; h<=12, j<=17; h++, j++){
+for (h=1, j=6; h<=12, j<=17; h++, j++){
 vis.append("text")
       .attr("x", paddingX -50)
       .attr("y", paddingY+2+  abstand(j)) 
@@ -3857,6 +3891,10 @@ vis.append("text")
 
  };
 
+
+
+
+
 $('.points').hide();
 $('.labelMonths').hide();
 $("#toggleMonths").on("click", function(){
@@ -3864,18 +3902,24 @@ $("#toggleMonths").on("click", function(){
     $('.line').show();
     $('.labelMonths').show();
     $('.line').hide();
+    $('.axis').hide();
+
+
 
 
 });
 
 
-//Need to attach to #canvas element, not window!!! -> FIX!!
+//Need to attach
 $("#fadeYears").on ("click",function() {
     console.log('Event Fired');
     $('.points').hide();
     $('.labelMonths').hide();
     fireLine();
     $('.line').hide();
+
+
+
 
 });
 

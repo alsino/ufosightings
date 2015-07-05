@@ -52,16 +52,6 @@ p {
   color: grey;
  }
 
-#zahlen{
-  padding-top: 2%;
-  color: orange;
-  padding-bottom: 5%;
-  font-weight: 200;
-  margin-right: 40%;
-  font-size: .7em;
-  border-bottom: solid grey 1px;
-}
-
 #additionalInfo{
   font-size: .5em;
   color: grey;
@@ -129,9 +119,8 @@ height: 100%;
   border: 2px solid #197575;
   font-family: 'Roboto',sans-serif;
   padding: 1%;
-  margin-left: 80%;
+  margin-left: 60%;
   margin-top: 15%;
-
 
 }
 
@@ -144,8 +133,8 @@ height: 100%;
   border: 2px solid #197575;
   font-family: 'Roboto',sans-serif;
   padding: 1%;
-  margin-left: 80%;
-  margin-top: 20%;
+  margin-left: 70%;
+  margin-top: 15%;
 }
 
 
@@ -159,7 +148,7 @@ height: 100%;
   font-family: 'Roboto',sans-serif;
   padding: 1%;
   margin-left: 80%;
-  margin-top: 25%;
+  margin-top: 15%;
 }
 
 #fadeYears:hover{
@@ -214,18 +203,50 @@ color: grey;
 
 
 
-
 .overlay{
+  font-family: Roboto;
+  font-size: 2em;
   color: white;
+  font-weight: 200;
   position: absolute;
   z-index: 3;
-  font-size: 2em;
   padding-left: 10%;
   padding-top: 10%;
-  padding-bottom: 2%;
 }
 
 
+#zahlen{
+  padding-top: 2%;
+  color: orange;
+  padding-bottom: 5%;
+  font-weight: 500;
+  margin-right: 30%;
+  font-size: .7em;
+  border-bottom: solid grey 1px;
+}
+
+#additionalInfo{
+ font-family: Roboto;
+  font-size: .6em;
+  fill: grey;
+  font-weight: 300;
+  padding-top: 5px;
+}
+
+.axis{
+  fill: none;
+  stroke-width: 1px;
+  stroke:grey;
+  shape-rendering: crispEdges;
+}
+
+
+.axis text{
+fill: grey;
+stroke: none;
+font-family: Roboto;
+font-size:.7em;
+}
 
 
 

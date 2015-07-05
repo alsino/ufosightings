@@ -37,7 +37,7 @@
 <div id="blind"></div>
 <button type="button" id="fadeYears">Sichtungen pro Jahr</button>
 <button type="button" id="toggleMonths">Sichtungen pro Monat</button>
-<button type="button" id="toggleElse">Nur aufgeklärte Fälle zeigen</button>
+<button type="button" id="toggleElse">Aufgeklärte Fälle </button>
 
 
 
@@ -168,6 +168,13 @@ var scaleMonth = d3.scale.linear()
 // y-Abstand labels year
 var labelPad = 100;
 
+// Variable für delay in Animation
+var delay = 400;
+
+//Variable für Dauer der Animation
+var duration = 4000;
+
+
 
 /*var x2015 = json.filter(function(d){ return d.Jahr == 2015;});
 var x2014 = json.filter(function(d){ return d.Jahr == 2014;});
@@ -177,7 +184,7 @@ var y2014 = console.log(x2014[0].Jahr); */
 
 
   
-//Color gradient 
+//Color gradient for yearly lines
  vis.append("linearGradient")
       .attr("id", "line-gradient")
       .attr("gradientUnits", "userSpaceOnUse")
@@ -271,29 +278,24 @@ vis.append("text")
  };
 
 
-
-//2014 Pre-layout with Line
+//Function to start line animation on click
 function fireLine() {
 
 //2015 Pre-layout with Line
 var j2015 = json.filter(function(d,i) { return d.Jahr ==2015; });
-vis.append("line")
-      .attr("stroke", "white")
-      .attr("stroke-width", 1)
+vis.append("line") // -> stroke-width defined in CSS
       .attr("x1", paddingX)
       .attr ("y1", paddingY+25)
       .attr("x2", paddingX)
       .attr ("y2", paddingY+25)
       .transition()
-      .delay(400)
-      .duration(4000)
+      .delay(delay)
+      .duration(duration)
       .attr("x2", paddingX+ 2.5*j2015.length)
-
-
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
-
+//2014 Pre-layout with Line
       var j2014 = json.filter(function(d,i) { return d.Jahr ==2014; });
   vis.append("line")
       .attr("x1", paddingX)
@@ -301,16 +303,522 @@ vis.append("line")
       .attr("x2", paddingX)
       .attr ("y2", paddingY+abstand(11.5))
       .transition()
-      .delay(400)
-      .duration(4000)
+      .delay(delay)
+      .duration(duration)
       .attr("x2", paddingX+ 2.5*j2014.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
 
 
+//2013 Pre-layout with Line
+var j2013 = json.filter(function(d,i) { return d.Jahr ==2013; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(25.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(25.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j2013.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//2012 Pre-layout with Line
+var j2012 = json.filter(function(d,i) { return d.Jahr ==2012; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(39.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(39.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j2012.length)
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
 
 
+//2011 Pre-layout with Line
+var j2011 = json.filter(function(d,i) { return d.Jahr ==2011; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(53.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(53.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j2011.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+
+//2010 Pre-layout with Line
+var j2010 = json.filter(function(d,i) { return d.Jahr ==2010; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(67.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(67.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j2010.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//2009 Pre-layout with Line
+var j2009 = json.filter(function(d,i) { return d.Jahr ==2009; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(81.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(81.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j2009.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//2008 Pre-layout with Line
+var j2008 = json.filter(function(d,i) { return d.Jahr ==2008; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(95.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(95.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j2008.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//2007 Pre-layout with Line
+var j2007 = json.filter(function(d,i) { return d.Jahr ==2007; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(109.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(109.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j2007.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//2006 Pre-layout with Line
+var j2006 = json.filter(function(d,i) { return d.Jahr ==2006; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(123.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(123.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j2006.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//2005 Pre-layout with Line
+var j2005 = json.filter(function(d,i) { return d.Jahr ==2005; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(137.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(137.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j2005.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+//2004 Pre-layout with Line
+var j2004 = json.filter(function(d,i) { return d.Jahr ==2004; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(151.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(151.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j2004.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//2003 Pre-layout with Line
+var j2003 = json.filter(function(d,i) { return d.Jahr ==2003; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(165.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(165.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j2003.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//2002 Pre-layout with Line
+var j2002 = json.filter(function(d,i) { return d.Jahr ==2002; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(179.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(179.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j2002.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//2001 Pre-layout with Line
+var j2001 = json.filter(function(d,i) { return d.Jahr ==2001; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(193.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(193.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j2001.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//2000 Pre-layout with Line
+var j2000 = json.filter(function(d,i) { return d.Jahr ==2000; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(207.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(207.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j2000.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1999 Pre-layout with Line
+var j1999 = json.filter(function(d,i) { return d.Jahr ==1999; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(221.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(221.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j1999.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1998 Pre-layout with Line
+var j1998 = json.filter(function(d,i) { return d.Jahr ==1998; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(235.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(235.5))  
+      .transition()
+      .delay(delay)
+      .duration(duration)    
+      .attr("x2", paddingX+ 2.5*j1998.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1997 Pre-layout with Line
+var j1997 = json.filter(function(d,i) { return d.Jahr ==1997; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(249.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(249.5))  
+      .transition()
+      .delay(delay)
+      .duration(duration) 
+      .attr("x2", paddingX+ 2.5*j1997.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1996 Pre-layout with Line
+var j1996 = json.filter(function(d,i) { return d.Jahr ==1996; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(263.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(263.5))
+      .transition()
+      .delay(delay)
+      .duration(duration) 
+      .attr("x2", paddingX+ 2.5*j1996.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1995 Pre-layout with Line
+var j1995 = json.filter(function(d,i) { return d.Jahr ==1995; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(277.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(277.5))
+      .transition()
+      .delay(delay)
+      .duration(duration) 
+      .attr("x2", paddingX+ 2.5*j1995.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1994 Pre-layout with Line
+var j1994 = json.filter(function(d,i) { return d.Jahr ==1994; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(291.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(291.5))
+      .transition()
+      .delay(delay)
+      .duration(duration) 
+      .attr("x2", paddingX+ 2.5*j1994.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1993 Pre-layout with Line
+var j1993 = json.filter(function(d,i) { return d.Jahr ==1993; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(305.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(305.5))
+      .transition()
+      .delay(delay)
+      .duration(duration) 
+      .attr("x2", paddingX+ 2.5*j1993.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1992 Pre-layout with Line
+var j1992 = json.filter(function(d,i) { return d.Jahr ==1992; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(319.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(319.5))
+      .transition()
+      .delay(delay)
+      .duration(duration) 
+      .attr("x2", paddingX+ 2.5*j1992.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1991 Pre-layout with Line
+var j1991 = json.filter(function(d,i) { return d.Jahr ==1991; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(333.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(333.5))
+      .transition()
+      .delay(delay)
+      .duration(duration) 
+      .attr("x2", paddingX+ 2.5*j1991.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1990 Pre-layout with Line
+var j1990 = json.filter(function(d,i) { return d.Jahr ==1990; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(347.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(347.5))
+      .transition()
+      .delay(delay)
+      .duration(duration) 
+      .attr("x2", paddingX+ 2.5*j1990.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1989 Pre-layout with Line
+var j1989 = json.filter(function(d,i) { return d.Jahr ==1989; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(361.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(361.5))
+      .transition()
+      .delay(delay)
+      .duration(duration) 
+      .attr("x2", paddingX+ 2.5*j1989.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1988 Pre-layout with Line
+var j1988 = json.filter(function(d,i) { return d.Jahr ==1988; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(375.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(375.5))
+      .transition()
+      .delay(delay)
+      .duration(duration) 
+      .attr("x2", paddingX+ 2.5*j1988.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1987 Pre-layout with Line
+var j1987 = json.filter(function(d,i) { return d.Jahr ==1987; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(389.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(389.5))
+      .transition()
+      .delay(delay)
+      .duration(duration) 
+      .attr("x2", paddingX+ 2.5*j1987.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1986 Pre-layout with Line
+var j1986 = json.filter(function(d,i) { return d.Jahr ==1986; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(403.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(403.5))
+      .transition()
+      .delay(delay)
+      .duration(duration) 
+      .attr("x2", paddingX+ 2.5*j1986.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1985 Pre-layout with Line
+var j1985 = json.filter(function(d,i) { return d.Jahr ==1985; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(417.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(417.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j1985.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1984 Pre-layout with Line
+var j1984 = json.filter(function(d,i) { return d.Jahr ==1984; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(431.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(431.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j1984.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1983 Pre-layout with Line
+var j1983 = json.filter(function(d,i) { return d.Jahr ==1983; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(445.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(445.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j1983.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1982 Pre-layout with Line
+var j1982 = json.filter(function(d,i) { return d.Jahr ==1982; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(459.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(459.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j1982.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1981 Pre-layout with Line
+var j1981 = json.filter(function(d,i) { return d.Jahr ==1981; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(473.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(473.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j1981.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
+
+
+//1980 Pre-layout with Line
+var j1980 = json.filter(function(d,i) { return d.Jahr ==1980; });
+vis.append("line")
+      .attr("x1", paddingX)
+      .attr ("y1", paddingY+abstand(487.5))
+      .attr("x2", paddingX)
+      .attr ("y2", paddingY+abstand(487.5))
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr("x2", paddingX+ 2.5*j1980.length)
+      .attr("stroke-linecap", "round")
+      .attr("class", "line")
 
     };
 
@@ -400,18 +908,6 @@ vis.append("text")
 
 
 
-//2013 Pre-layout with Line
-var j2013 = json.filter(function(d,i) { return d.Jahr ==2013; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(25.5))
-      .attr("x2", paddingX+ 2.5*j2013.length)
-      .attr ("y2", paddingY+abstand(25.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
-
-
-
 /////// 2013 //////
 for (i=1, j=20; i<=12, j<=31; i++, j++){
   vis.selectAll("circles")
@@ -479,16 +975,6 @@ vis.append("text")
  };
 
 
-
-//2012 Pre-layout with Line
-var j2012 = json.filter(function(d,i) { return d.Jahr ==2012; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(39.5))
-      .attr("x2", paddingX+ 2.5*j2012.length)
-      .attr ("y2", paddingY+abstand(39.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
 
 
 
@@ -559,19 +1045,6 @@ vis.append("text")
 
 
 
-//2011 Pre-layout with Line
-var j2011 = json.filter(function(d,i) { return d.Jahr ==2011; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(53.5))
-      .attr("x2", paddingX+ 2.5*j2011.length)
-      .attr ("y2", paddingY+abstand(53.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
-
-
-
-
 
 /////// 2011 //////
 for (i=1, j=48; i<=12, j<=59; i++, j++){
@@ -636,18 +1109,6 @@ vis.append("text")
       .attr("class", "labelMonths")
 
  };
-
-
-
-//2010 Pre-layout with Line
-var j2010 = json.filter(function(d,i) { return d.Jahr ==2010; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(67.5))
-      .attr("x2", paddingX+ 2.5*j2010.length)
-      .attr ("y2", paddingY+abstand(67.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
 
 
 
@@ -722,19 +1183,6 @@ vis.append("text")
 
 
 
-//2009 Pre-layout with Line
-var j2009 = json.filter(function(d,i) { return d.Jahr ==2009; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(81.5))
-      .attr("x2", paddingX+ 2.5*j2009.length)
-      .attr ("y2", paddingY+abstand(81.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
-
-
-
-
 /////// 2009 //////
 for (i=1, j=76; i<=12, j<=87; i++, j++){
   vis.selectAll("circles")
@@ -803,15 +1251,7 @@ vis.append("text")
 
 
 
-//2008 Pre-layout with Line
-var j2008 = json.filter(function(d,i) { return d.Jahr ==2008; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(95.5))
-      .attr("x2", paddingX+ 2.5*j2008.length)
-      .attr ("y2", paddingY+abstand(95.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
+
 
 
 
@@ -882,17 +1322,6 @@ vis.append("text")
 
 
 
-//2007 Pre-layout with Line
-var j2007 = json.filter(function(d,i) { return d.Jahr ==2007; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(109.5))
-      .attr("x2", paddingX+ 2.5*j2007.length)
-      .attr ("y2", paddingY+abstand(109.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
-
-
 
 /////// 2007 //////
 for (i=1, j=104; i<=12, j<=115; i++, j++){
@@ -960,16 +1389,6 @@ vis.append("text")
  };
 
 
-
-//2006 Pre-layout with Line
-var j2006 = json.filter(function(d,i) { return d.Jahr ==2006; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(123.5))
-      .attr("x2", paddingX+ 2.5*j2006.length)
-      .attr ("y2", paddingY+abstand(123.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
 
 
 
@@ -1039,18 +1458,6 @@ vis.append("text")
  };
 
 
-
-//2005 Pre-layout with Line
-var j2005 = json.filter(function(d,i) { return d.Jahr ==2005; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(137.5))
-      .attr("x2", paddingX+ 2.5*j2005.length)
-      .attr ("y2", paddingY+abstand(137.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
-
-
         /////// 2005 //////
 for (i=1, j=132; i<=12, j<=143; i++, j++){
   vis.selectAll("circles")
@@ -1116,18 +1523,6 @@ vis.append("text")
 
  };
 
-
-
-
-//2004 Pre-layout with Line
-var j2004 = json.filter(function(d,i) { return d.Jahr ==2004; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(151.5))
-      .attr("x2", paddingX+ 2.5*j2004.length)
-      .attr ("y2", paddingY+abstand(151.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
 
 
 
@@ -1199,16 +1594,6 @@ vis.append("text")
  };
 
 
-//2003 Pre-layout with Line
-var j2003 = json.filter(function(d,i) { return d.Jahr ==2003; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(165.5))
-      .attr("x2", paddingX+ 2.5*j2003.length)
-      .attr ("y2", paddingY+abstand(165.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
-
 
 /////// 2003 //////
 for (i=1, j=160; i<=12, j<=171; i++, j++){
@@ -1277,15 +1662,6 @@ vis.append("text")
  };
 
 
-//2002 Pre-layout with Line
-var j2002 = json.filter(function(d,i) { return d.Jahr ==2002; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(179.5))
-      .attr("x2", paddingX+ 2.5*j2002.length)
-      .attr ("y2", paddingY+abstand(179.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
 
 
 
@@ -1355,15 +1731,7 @@ vis.append("text")
  };
 
 
-//2001 Pre-layout with Line
-var j2001 = json.filter(function(d,i) { return d.Jahr ==2001; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(193.5))
-      .attr("x2", paddingX+ 2.5*j2001.length)
-      .attr ("y2", paddingY+abstand(193.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
+
 
 
 /////// 2001 //////
@@ -1431,17 +1799,6 @@ vis.append("text")
 
  };
 
-
-
-//2000 Pre-layout with Line
-var j2000 = json.filter(function(d,i) { return d.Jahr ==2000; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(207.5))
-      .attr("x2", paddingX+ 2.5*j2000.length)
-      .attr ("y2", paddingY+abstand(207.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
 
 
 
@@ -1517,15 +1874,6 @@ vis.append("text")
 
 
 
-//1999 Pre-layout with Line
-var j1999 = json.filter(function(d,i) { return d.Jahr ==1999; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(221.5))
-      .attr("x2", paddingX+ 2.5*j1999.length)
-      .attr ("y2", paddingY+abstand(221.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
 
 
 /////// 1999 //////
@@ -1599,16 +1947,6 @@ vis.append("text")
 
  };
 
-
-//1998 Pre-layout with Line
-var j1998 = json.filter(function(d,i) { return d.Jahr ==1998; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(235.5))
-      .attr("x2", paddingX+ 2.5*j1998.length)
-      .attr ("y2", paddingY+abstand(235.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
 
 
 /////// 1998 //////
@@ -1686,17 +2024,6 @@ vis.append("text")
  };
 
 
-//1997 Pre-layout with Line
-var j1997 = json.filter(function(d,i) { return d.Jahr ==1997; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(249.5))
-      .attr("x2", paddingX+ 2.5*j1997.length)
-      .attr ("y2", paddingY+abstand(249.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
-
-
 /////// 1997 //////
 for (i=1, j=244; i<=12, j<=255; i++, j++){
   vis.selectAll("circles")
@@ -1770,16 +2097,6 @@ vis.append("text")
 
  };
 
-
-//1996 Pre-layout with Line
-var j1996 = json.filter(function(d,i) { return d.Jahr ==1996; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(263.5))
-      .attr("x2", paddingX+ 2.5*j1996.length)
-      .attr ("y2", paddingY+abstand(263.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
 
 
 /////// 1996 //////
@@ -1855,16 +2172,6 @@ vis.append("text")
 
  };
 
-
-//1995 Pre-layout with Line
-var j1995 = json.filter(function(d,i) { return d.Jahr ==1995; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(277.5))
-      .attr("x2", paddingX+ 2.5*j1995.length)
-      .attr ("y2", paddingY+abstand(277.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
 
 
 
@@ -1942,15 +2249,6 @@ vis.append("text")
  };
 
 
-//1994 Pre-layout with Line
-var j1994 = json.filter(function(d,i) { return d.Jahr ==1994; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(291.5))
-      .attr("x2", paddingX+ 2.5*j1994.length)
-      .attr ("y2", paddingY+abstand(291.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
 
 
  /////// 1994 //////
@@ -2025,17 +2323,6 @@ vis.append("text")
       .attr("class", "labelMonths")
 
  };
-
-
-//1993 Pre-layout with Line
-var j1993 = json.filter(function(d,i) { return d.Jahr ==1993; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(305.5))
-      .attr("x2", paddingX+ 2.5*j1993.length)
-      .attr ("y2", paddingY+abstand(305.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
 
 
 
@@ -2113,15 +2400,6 @@ vis.append("text")
  };
 
 
-//1992 Pre-layout with Line
-var j1992 = json.filter(function(d,i) { return d.Jahr ==1992; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(319.5))
-      .attr("x2", paddingX+ 2.5*j1992.length)
-      .attr ("y2", paddingY+abstand(319.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
 
 
    /////// 1992 //////
@@ -2198,16 +2476,6 @@ vis.append("text")
  };
 
 
-//1991 Pre-layout with Line
-var j1991 = json.filter(function(d,i) { return d.Jahr ==1991; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(333.5))
-      .attr("x2", paddingX+ 2.5*j1991.length)
-      .attr ("y2", paddingY+abstand(333.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
-
 
    /////// 1991 //////
 for (i=1, j=328; i<=12, j<=339; i++, j++){
@@ -2283,16 +2551,6 @@ vis.append("text")
  };
 
 
-//1990 Pre-layout with Line
-var j1990 = json.filter(function(d,i) { return d.Jahr ==1990; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(347.5))
-      .attr("x2", paddingX+ 2.5*j1990.length)
-      .attr ("y2", paddingY+abstand(347.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
-
 
    /////// 1990 //////
 for (i=1, j=342; i<=12, j<=353; i++, j++){
@@ -2367,16 +2625,6 @@ vis.append("text")
 
  };
 
-
-//1989 Pre-layout with Line
-var j1989 = json.filter(function(d,i) { return d.Jahr ==1989; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(361.5))
-      .attr("x2", paddingX+ 2.5*j1989.length)
-      .attr ("y2", paddingY+abstand(361.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
 
 
    /////// 1989 //////
@@ -2454,17 +2702,6 @@ vis.append("text")
 
 
 
-//1988 Pre-layout with Line
-var j1988 = json.filter(function(d,i) { return d.Jahr ==1988; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(375.5))
-      .attr("x2", paddingX+ 2.5*j1988.length)
-      .attr ("y2", paddingY+abstand(375.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
-
-
    /////// 1988 //////
 for (i=1, j=370; i<=12, j<=381; i++, j++){
   vis.selectAll("circles")
@@ -2537,17 +2774,6 @@ vis.append("text")
       .attr("class", "labelMonths")
 
  };
-
-
-//1987 Pre-layout with Line
-var j1987 = json.filter(function(d,i) { return d.Jahr ==1987; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(389.5))
-      .attr("x2", paddingX+ 2.5*j1987.length)
-      .attr ("y2", paddingY+abstand(389.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
 
 
     /////// 1987 //////
@@ -2624,15 +2850,7 @@ vis.append("text")
  };
 
 
-//1986 Pre-layout with Line
-var j1986 = json.filter(function(d,i) { return d.Jahr ==1986; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(403.5))
-      .attr("x2", paddingX+ 2.5*j1986.length)
-      .attr ("y2", paddingY+abstand(403.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
+
 
 
      /////// 1986 //////
@@ -2710,16 +2928,6 @@ vis.append("text")
 
 
 
-//1985 Pre-layout with Line
-var j1985 = json.filter(function(d,i) { return d.Jahr ==1985; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(417.5))
-      .attr("x2", paddingX+ 2.5*j1985.length)
-      .attr ("y2", paddingY+abstand(417.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
-
 
      /////// 1985 //////
 for (i=1, j=412; i<=12, j<=423; i++, j++){
@@ -2794,16 +3002,6 @@ vis.append("text")
 
  };
 
-
-//1984 Pre-layout with Line
-var j1984 = json.filter(function(d,i) { return d.Jahr ==1984; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(431.5))
-      .attr("x2", paddingX+ 2.5*j1984.length)
-      .attr ("y2", paddingY+abstand(431.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
 
 
       /////// 1984 //////
@@ -2880,16 +3078,6 @@ vis.append("text")
  };
 
 
-//1983 Pre-layout with Line
-var j1983 = json.filter(function(d,i) { return d.Jahr ==1983; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(445.5))
-      .attr("x2", paddingX+ 2.5*j1983.length)
-      .attr ("y2", paddingY+abstand(445.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
-
 
       /////// 1983 //////
 for (i=1, j=440; i<=12, j<=451; i++, j++){
@@ -2964,17 +3152,6 @@ vis.append("text")
 
  };
 
-
-
-//1982 Pre-layout with Line
-var j1982 = json.filter(function(d,i) { return d.Jahr ==1982; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(459.5))
-      .attr("x2", paddingX+ 2.5*j1982.length)
-      .attr ("y2", paddingY+abstand(459.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
 
 
 
@@ -3053,17 +3230,6 @@ vis.append("text")
 
 
 
-//1981 Pre-layout with Line
-var j1981 = json.filter(function(d,i) { return d.Jahr ==1981; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(473.5))
-      .attr("x2", paddingX+ 2.5*j1981.length)
-      .attr ("y2", paddingY+abstand(473.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
-
-
 
       /////// 1981 //////
 for (i=1, j=468; i<=12, j<=479; i++, j++){
@@ -3140,15 +3306,6 @@ vis.append("text")
 
 
 
-//1980 Pre-layout with Line
-var j1980 = json.filter(function(d,i) { return d.Jahr ==1980; });
-vis.append("line")
-      .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(487.5))
-      .attr("x2", paddingX+ 2.5*j1980.length)
-      .attr ("y2", paddingY+abstand(487.5))
-      .attr("stroke-linecap", "round")
-      .attr("class", "line")
 
 
       /////// 1980 //////
@@ -3660,6 +3817,7 @@ $("#toggleMonths").on("click", function(){
     $('.labelMonths').show();
     $('.line').hide();
 
+
 });
 
 
@@ -3736,7 +3894,7 @@ window.onload = function() {
 </section>
 
 <section id="foot">
-<a href="http://twitter.com/alsinosko"> Alsino <br> Skowronnek</a><br> &copy2015 <br> picture credits: http://www.google.de/imgres?imgurl=http%3A%2F%2Fdebunker.com%2Fimages2%2FTrent1_Full_400dpi.jpg&imgrefurl=http%3A%2F%2Fdebunker.com%2Ftrent.html&h=2800&w=3833&tbnid=-CXG3ptpFqqyOM%3A&zoom=1&docid=8rcqK5Rpr7biQM&ei=Fv6OVd7MCei07gaJooSYBw&tbm=isch&iact=rc&uact=3&dur=369&page=1&start=0&ndsp=33&ved=0CCAQrQMwAA
+<a href="http://twitter.com/alsinosko"> Alsino <br> Skowronnek</a><br> &copy2015 <br> picture credits: http://www.google.de/imgres?imgurl=http%3A%2F%2Fdebunker.com%2Fimages2%2FTrent1_Full_400dpi.jpg&imgrefurl=http%3A%2F%2Fdebunker.com%2Ftrent.html&h=2800&w=3833&tbnid=-CXG3ptpFqqyOM%3A&zoom=1&docid=8rcqK5Rpr7biQM&ei=Fv6OVd7MCei07gaJooSYBw&tbm=isch&iact=rc&uact=3&dur=369&page=1&start=0&ndsp=33&ved=0CCAQrQMwAA <br> http://www.google.de/imgres?imgurl=http%3A%2F%2Fwww.randnotizen.org%2Fwp-content%2Fuploads%2Ffull%2F0035-Sternenhimmel.jpg&imgrefurl=http%3A%2F%2Fwww.randnotizen.org%2Fsternenhimmel%2F&h=1080&w=1920&tbnid=bTep_gKq71MoMM%3A&zoom=1&docid=Oq9FlhGUGc92YM&ei=GhKZVbWNO4i1ygOt0ZygBA&tbm=isch&iact=rc&uact=3&dur=261&page=1&start=0&ndsp=28&ved=0CEgQrQMwBg
 </section>
 
 <script src='jquery-1.11.2.min.js'></script>

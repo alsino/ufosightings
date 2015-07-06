@@ -37,7 +37,7 @@ p {
   background-position: center; 
   padding: 10%;
   color: black;
-  font-size: 2em;
+  font-size: 2.2em;
   font-weight: 800;
   text-align: left;
   line-height: 1;
@@ -46,9 +46,10 @@ p {
 
 
  #subheading{
+  font-size: .8em;
   padding-top: 2%;
   line-height: 130%;
-  font-weight: 200;
+  font-weight: 100;
   color: grey;
  }
 
@@ -83,9 +84,41 @@ p {
   letter-spacing: 0.01rem;
   color: black;
   line-height: 30px;
+}
+
+#descr a{
+  color: orange;
+}
+
+#U{
+    font-size: 2em;
+    font-weight: 800;
 
 }
 
+
+#line{
+  border-top: grey solid 1px;
+  margin-right: 55%;
+  margin-left: 35%;
+  padding-bottom: 1%;
+}
+
+#zitat{
+  padding-left: 20%;
+  padding-right: 20%;
+  font-family: "freight-text-pro",Georgia,Cambria,"Times New Roman",Times,serif;
+  font-size: 1.1em;
+  text-align: center;
+  letter-spacing: 0.01rem;
+  color: black;
+  line-height: 30px;
+}
+
+
+#zitat a{
+ color: orange;
+}
 
 #blind{
 position: absolute;

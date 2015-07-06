@@ -196,15 +196,22 @@ color: grey;
 color: grey;
 }
 
+#social{
+  background-color: #197575;
+  color: white;
+  padding-top: 10%;
+  padding-right: 10%;
+}
+
 
 #foot{
+  padding-top: 20%;
+  padding-bottom: 20%;
   background-color: #0f0a0e;
-  height: 600px;
   font-weight: bolder;
   font-size: .8em;
   text-align: center;
   color: white;
-  padding-top: 40%;
  }
 
 

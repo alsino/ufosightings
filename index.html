@@ -93,6 +93,15 @@ var abstand = function multiply (value){
     return s* value;
 }
 
+var abstandLine = function abstandL (p){
+   var s =10;
+   return paddingY + s*p;
+}
+
+
+
+
+
 //Variable für x-Abstand zwischen den Punkten
 var zwischen = 10;
 
@@ -108,6 +117,7 @@ var unident ="white"
 //Variable für path und text Farbe
 var colorPath = "white";
 var colorPathText = "orange";
+var colorLineLabel = "grey";
 
 //Variable für radius
 var radius = 3;
@@ -115,6 +125,7 @@ var radius = 3;
 //Variable für font-size Legende orange
 var fontSize = 12;
 var fontSizeMonths = 9.5;
+var fontSizeLabelLine =10;
 
 
 //Scale that translates month number to Jan, Feb, Mär, etc.
@@ -212,9 +223,6 @@ console.log(j1976.length);
 
 
 
-
-
-
 /*var x2015 = json.filter(function(d){ return d.Jahr == 2015;});
 var x2014 = json.filter(function(d){ return d.Jahr == 2014;});
 
@@ -247,6 +255,11 @@ function dataInput(month,year){
 
 
 
+var abstandLine = function abstandL (p){
+   var s =25;
+   return 500 + s*p;
+}
+
 
 
 
@@ -259,9 +272,9 @@ function fireLine() {
 var j2015 = json.filter(function(d,i) { return d.Jahr ==2015; });
 vis.append("line") // -> stroke-width defined in CSS
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(1.5))
+      .attr ("y1", abstandLine(2))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(1.5))
+      .attr ("y2", abstandLine(2))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -270,15 +283,24 @@ vis.append("line") // -> stroke-width defined in CSS
       .attr("class", "line")
 
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(2)+2)
+      .text("2015")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
 
 
 //2014 Pre-layout with Line
       var j2014 = json.filter(function(d,i) { return d.Jahr ==2014; });
   vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(11.5))
+      .attr ("y1", abstandLine(2.5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(11.5))
+      .attr ("y2", abstandLine(2.5))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -286,14 +308,24 @@ vis.append("line") // -> stroke-width defined in CSS
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(2.5)+2)
+      .text("2014")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //2013 Pre-layout with Line
 var j2013 = json.filter(function(d,i) { return d.Jahr ==2013; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(25.5))
+      .attr ("y1", abstandLine(3))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(25.5))
+      .attr ("y2", abstandLine(3))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -301,14 +333,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(3)+2)
+      .text("2013")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //2012 Pre-layout with Line
 var j2012 = json.filter(function(d,i) { return d.Jahr ==2012; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(39.5))
+      .attr ("y1", abstandLine(3.5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(39.5))
+      .attr ("y2", abstandLine(3.5))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -316,15 +358,23 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
-
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(3.5)+2)
+      .text("2012")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
 
 //2011 Pre-layout with Line
 var j2011 = json.filter(function(d,i) { return d.Jahr ==2011; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(53.5))
+      .attr ("y1", abstandLine(4))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(53.5))
+      .attr ("y2", abstandLine(4))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -332,15 +382,23 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
-
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(4)+2)
+      .text("2011")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
 
 //2010 Pre-layout with Line
 var j2010 = json.filter(function(d,i) { return d.Jahr ==2010; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(67.5))
+      .attr ("y1", abstandLine(4.5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(67.5))
+      .attr ("y2", abstandLine(4.5))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -348,14 +406,23 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(4.5)+2)
+      .text("2010")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
 
 //2009 Pre-layout with Line
 var j2009 = json.filter(function(d,i) { return d.Jahr ==2009; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(81.5))
+      .attr ("y1", abstandLine(5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(81.5))
+      .attr ("y2", abstandLine(5))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -363,14 +430,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+  //Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(5)+2)
+      .text("2009")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //2008 Pre-layout with Line
 var j2008 = json.filter(function(d,i) { return d.Jahr ==2008; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(95.5))
+      .attr ("y1", abstandLine(5.5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(95.5))
+      .attr ("y2", abstandLine(5.5))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -378,14 +455,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+ //Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(5.5)+2)
+      .text("2008")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //2007 Pre-layout with Line
 var j2007 = json.filter(function(d,i) { return d.Jahr ==2007; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(109.5))
+      .attr ("y1", abstandLine(6))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(109.5))
+      .attr ("y2", abstandLine(6))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -394,13 +481,25 @@ vis.append("line")
       .attr("class", "line")
 
 
+ //Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(6)+2)
+      .text("2007")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
+
+
 //2006 Pre-layout with Line
 var j2006 = json.filter(function(d,i) { return d.Jahr ==2006; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(123.5))
+      .attr ("y1", abstandLine(6.5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(123.5))
+      .attr ("y2", abstandLine(6.5))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -408,14 +507,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(6.5)+2)
+      .text("2006")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //2005 Pre-layout with Line
 var j2005 = json.filter(function(d,i) { return d.Jahr ==2005; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(137.5))
+      .attr ("y1", abstandLine(7))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(137.5))
+      .attr ("y2", abstandLine(7))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -423,13 +532,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(7)+2)
+      .text("2005")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
+
 //2004 Pre-layout with Line
 var j2004 = json.filter(function(d,i) { return d.Jahr ==2004; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(151.5))
+      .attr ("y1", abstandLine(7.5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(151.5))
+      .attr ("y2", abstandLine(7.5))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -437,14 +557,25 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(7.5)+2)
+      .text("2004")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
+
 
 //2003 Pre-layout with Line
 var j2003 = json.filter(function(d,i) { return d.Jahr ==2003; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(165.5))
+      .attr ("y1", abstandLine(8))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(165.5))
+      .attr ("y2", abstandLine(8))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -452,14 +583,25 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(8)+2)
+      .text("2003")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
+
 
 //2002 Pre-layout with Line
 var j2002 = json.filter(function(d,i) { return d.Jahr ==2002; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(179.5))
+      .attr ("y1", abstandLine(8.5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(179.5))
+      .attr ("y2", abstandLine(8.5))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -467,14 +609,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(8.5)+2)
+      .text("2002")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //2001 Pre-layout with Line
 var j2001 = json.filter(function(d,i) { return d.Jahr ==2001; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(193.5))
+      .attr ("y1", abstandLine(9))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(193.5))
+      .attr ("y2", abstandLine(9))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -482,14 +634,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(9)+2)
+      .text("2001")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //2000 Pre-layout with Line
 var j2000 = json.filter(function(d,i) { return d.Jahr ==2000; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(207.5))
+      .attr ("y1", abstandLine(9.5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(207.5))
+      .attr ("y2", abstandLine(9.5))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -497,14 +659,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(9.5)+2)
+      .text("2000")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //1999 Pre-layout with Line
 var j1999 = json.filter(function(d,i) { return d.Jahr ==1999; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(221.5))
+      .attr ("y1", abstandLine(10))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(221.5))
+      .attr ("y2", abstandLine(10))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -512,14 +684,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(10)+2)
+      .text("1999")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //1998 Pre-layout with Line
 var j1998 = json.filter(function(d,i) { return d.Jahr ==1998; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(235.5))
+      .attr ("y1", abstandLine(10.5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(235.5))  
+      .attr ("y2", abstandLine(10.5))  
       .transition()
       .delay(delay)
       .duration(duration)    
@@ -527,14 +709,23 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(10.5)+2)
+      .text("1998")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
 
 //1997 Pre-layout with Line
 var j1997 = json.filter(function(d,i) { return d.Jahr ==1997; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(249.5))
+      .attr ("y1", abstandLine(11))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(249.5))  
+      .attr ("y2", abstandLine(11))  
       .transition()
       .delay(delay)
       .duration(duration) 
@@ -542,14 +733,23 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(11)+2)
+      .text("1997")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
 
 //1996 Pre-layout with Line
 var j1996 = json.filter(function(d,i) { return d.Jahr ==1996; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(263.5))
+      .attr ("y1", abstandLine(11.5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(263.5))
+      .attr ("y2", abstandLine(11.5))
       .transition()
       .delay(delay)
       .duration(duration) 
@@ -557,14 +757,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(11.5)+2)
+      .text("1996")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //1995 Pre-layout with Line
 var j1995 = json.filter(function(d,i) { return d.Jahr ==1995; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(277.5))
+      .attr ("y1", abstandLine(12))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(277.5))
+      .attr ("y2", abstandLine(12))
       .transition()
       .delay(delay)
       .duration(duration) 
@@ -572,14 +782,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(12)+2)
+      .text("1995")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //1994 Pre-layout with Line
 var j1994 = json.filter(function(d,i) { return d.Jahr ==1994; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(291.5))
+      .attr ("y1", abstandLine(12.5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(291.5))
+      .attr ("y2", abstandLine(12.5))
       .transition()
       .delay(delay)
       .duration(duration) 
@@ -587,14 +807,23 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(12.5)+2)
+      .text("1994")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
 
 //1993 Pre-layout with Line
 var j1993 = json.filter(function(d,i) { return d.Jahr ==1993; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(305.5))
+      .attr ("y1", abstandLine(13))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(305.5))
+      .attr ("y2", abstandLine(13))
       .transition()
       .delay(delay)
       .duration(duration) 
@@ -603,13 +832,25 @@ vis.append("line")
       .attr("class", "line")
 
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(13)+2)
+      .text("1993")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
+
+
 //1992 Pre-layout with Line
 var j1992 = json.filter(function(d,i) { return d.Jahr ==1992; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(319.5))
+      .attr ("y1", abstandLine(13.5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(319.5))
+      .attr ("y2", abstandLine(13.5))
       .transition()
       .delay(delay)
       .duration(duration) 
@@ -617,14 +858,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(13.5)+2)
+      .text("1992")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //1991 Pre-layout with Line
 var j1991 = json.filter(function(d,i) { return d.Jahr ==1991; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(333.5))
+      .attr ("y1", abstandLine(14))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(333.5))
+      .attr ("y2", abstandLine(14))
       .transition()
       .delay(delay)
       .duration(duration) 
@@ -632,14 +883,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(14)+2)
+      .text("1991")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //1990 Pre-layout with Line
 var j1990 = json.filter(function(d,i) { return d.Jahr ==1990; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(347.5))
+      .attr ("y1", abstandLine(14.5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(347.5))
+      .attr ("y2", abstandLine(14.5))
       .transition()
       .delay(delay)
       .duration(duration) 
@@ -647,14 +908,23 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(14.5)+2)
+      .text("1990")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
 
 //1989 Pre-layout with Line
 var j1989 = json.filter(function(d,i) { return d.Jahr ==1989; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(361.5))
+      .attr ("y1", abstandLine(15))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(361.5))
+      .attr ("y2", abstandLine(15))
       .transition()
       .delay(delay)
       .duration(duration) 
@@ -662,14 +932,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(15)+2)
+      .text("1989")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //1988 Pre-layout with Line
 var j1988 = json.filter(function(d,i) { return d.Jahr ==1988; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(375.5))
+      .attr ("y1", abstandLine(15.5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(375.5))
+      .attr ("y2", abstandLine(15.5))
       .transition()
       .delay(delay)
       .duration(duration) 
@@ -677,14 +957,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(15.5)+2)
+      .text("1988")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //1987 Pre-layout with Line
 var j1987 = json.filter(function(d,i) { return d.Jahr ==1987; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(389.5))
+      .attr ("y1", abstandLine(16))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(389.5))
+      .attr ("y2", abstandLine(16))
       .transition()
       .delay(delay)
       .duration(duration) 
@@ -693,13 +983,24 @@ vis.append("line")
       .attr("class", "line")
 
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(16)+2)
+      .text("1987")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
+
 //1986 Pre-layout with Line
 var j1986 = json.filter(function(d,i) { return d.Jahr ==1986; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(403.5))
+      .attr ("y1", abstandLine(16.5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(403.5))
+      .attr ("y2", abstandLine(16.5))
       .transition()
       .delay(delay)
       .duration(duration) 
@@ -707,14 +1008,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+      //Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(16.5)+2)
+      .text("1986")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //1985 Pre-layout with Line
 var j1985 = json.filter(function(d,i) { return d.Jahr ==1985; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(417.5))
+      .attr ("y1", abstandLine(17))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(417.5))
+      .attr ("y2", abstandLine(17))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -723,13 +1034,24 @@ vis.append("line")
       .attr("class", "line")
 
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(17)+2)
+      .text("1985")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
+
 //1984 Pre-layout with Line
 var j1984 = json.filter(function(d,i) { return d.Jahr ==1984; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(431.5))
+      .attr ("y1", abstandLine(17.5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(431.5))
+      .attr ("y2", abstandLine(17.5))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -738,13 +1060,24 @@ vis.append("line")
       .attr("class", "line")
 
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(17.5)+2)
+      .text("1984")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
+
 //1983 Pre-layout with Line
 var j1983 = json.filter(function(d,i) { return d.Jahr ==1983; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(445.5))
+      .attr ("y1", abstandLine(18))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(445.5))
+      .attr ("y2", abstandLine(18))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -752,14 +1085,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(18)+2)
+      .text("1983")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //1982 Pre-layout with Line
 var j1982 = json.filter(function(d,i) { return d.Jahr ==1982; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(459.5))
+      .attr ("y1", abstandLine(18.5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(459.5))
+      .attr ("y2", abstandLine(18.5))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -767,14 +1110,23 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(18.5)+2)
+      .text("1982")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
 
 //1981 Pre-layout with Line
 var j1981 = json.filter(function(d,i) { return d.Jahr ==1981; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(473.5))
+      .attr ("y1", abstandLine(19))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(473.5))
+      .attr ("y2", abstandLine(19))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -782,14 +1134,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(19)+2)
+      .text("1981")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //1980 Pre-layout with Line
 var j1980 = json.filter(function(d,i) { return d.Jahr ==1980; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(487.5))
+      .attr ("y1", abstandLine(19.5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(487.5))
+      .attr ("y2", abstandLine(19.5))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -797,14 +1159,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(19.5)+2)
+      .text("1980")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //1979 Pre-layout with Line
 var j1979 = json.filter(function(d,i) { return d.Jahr ==1979; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(501.5))
+      .attr ("y1", abstandLine(20))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(501.5))
+      .attr ("y2", abstandLine(20))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -812,14 +1184,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(20)+2)
+      .text("1979")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //1978 Pre-layout with Line
 var j1978 = json.filter(function(d,i) { return d.Jahr ==1978; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(515.5))
+      .attr ("y1", abstandLine(20.5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(515.5))
+      .attr ("y2", abstandLine(20.5))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -827,14 +1209,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(20.5)+2)
+      .text("1978")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //1977 Pre-layout with Line
 var j1977 = json.filter(function(d,i) { return d.Jahr ==1977; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(529.5))
+      .attr ("y1", abstandLine(21))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(529.5))
+      .attr ("y2", abstandLine(21))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -843,13 +1235,23 @@ vis.append("line")
       .attr("class", "line")
 
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(21)+2)
+      .text("1977")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 //1976 Pre-layout with Line
 var j1976 = json.filter(function(d,i) { return d.Jahr ==1976; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(543.5))
+      .attr ("y1", abstandLine(21.5))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(543.5))
+      .attr ("y2", abstandLine(21.5))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -857,14 +1259,24 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(21.5)+2)
+      .text("1976")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
+
 
 //1975 Pre-layout with Line
 var j1975 = json.filter(function(d,i) { return d.Jahr ==1975; });
 vis.append("line")
       .attr("x1", paddingX)
-      .attr ("y1", paddingY+abstand(557.5))
+      .attr ("y1", abstandLine(22))
       .attr("x2", paddingX)
-      .attr ("y2", paddingY+abstand(557.5))
+      .attr ("y2", abstandLine(22))
       .transition()
       .delay(delay)
       .duration(duration)
@@ -872,6 +1284,15 @@ vis.append("line")
       .attr("stroke-linecap", "round")
       .attr("class", "line")
 
+//Label Line
+vis.append("text")
+      .attr("x", 350)
+      .attr("y", abstandLine(22)+2)
+      .text("1975")
+      .attr("font-family", "Roboto")
+      .attr("font-size", fontSizeLabelLine+"px")
+      .attr("fill", colorLineLabel)
+      .attr("class", "labelLine")
 
 
 //Make scale for x-Axis
@@ -900,11 +1321,11 @@ var Xscale = d3.scale.linear()
 
     };
 /// FUNCTION ENDS HERE /////
+
+
+
 // START DOT GRAPH FROM HERE ////
 
-
-
-
 /////// 2015 //////Points
 for (i=1, j=0; i<=4, j<=3; i++, j++){
   vis.selectAll("circles")
@@ -939,18 +1360,6 @@ for (i=1, j=0; i<=4, j<=3; i++, j++){
 
 
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){   return paddingY+  abstand(0)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){   return paddingY+  abstand(3)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
- 
-
 //Text label year
 vis.append("text")
       .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
@@ -959,8 +1368,7 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
       .attr("fill", colorPathText)
-
-
+      .attr("class", "labelYears")
 
 
 
@@ -1016,14 +1424,6 @@ for (i=1, j=6; i<=12, j<=17; i++, j++){
 $('.points').hide();
 
 
-  //Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(6)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(17)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
 
 
 //Text label year
@@ -1034,10 +1434,7 @@ vis.append("text")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
       .attr("fill", colorPathText)
-
-           .on("click", function(){
-          $('.toggletest2014').toggle(1500) 
-    });
+      .attr("class", "labelYears")
     
 
 
@@ -1091,14 +1488,6 @@ for (i=1, j=20; i<=12, j<=31; i++, j++){
     .attr("class", "points")
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(20)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(31)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
 
 
 //Text label year
@@ -1108,7 +1497,8 @@ vis.append("text")
       .text("2013")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -1161,14 +1551,6 @@ for (i=1, j=34; i<=12, j<=45; i++, j++){
     .attr("class", "points")
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(34)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(45)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
 
 
 //Text label year
@@ -1178,7 +1560,8 @@ vis.append("text")
       .text("2012")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 ///Text label months
@@ -1228,14 +1611,6 @@ for (i=1, j=48; i<=12, j<=59; i++, j++){
     .attr("class", "points")
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(48)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(59)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
 
 
 //Text label year
@@ -1245,7 +1620,8 @@ vis.append("text")
       .text("2011")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 ///Text label months
@@ -1298,14 +1674,6 @@ for (i=1, j=62; i<=12, j<=73; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(62)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(73)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
 
 
 //Text label year
@@ -1315,7 +1683,8 @@ vis.append("text")
       .text("2010")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 ///Text label months
@@ -1366,14 +1735,6 @@ for (i=1, j=76; i<=12, j<=87; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(76)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(87)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
 
 
 //Text label year
@@ -1383,7 +1744,8 @@ vis.append("text")
       .text("2009")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 ///Text label months
@@ -1398,10 +1760,6 @@ vis.append("text")
       .attr("class", "labelMonths")
 
  };
-
-
-
-
 
 
 
@@ -1438,14 +1796,6 @@ for (i=1, j=90; i<=12, j<=101; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(90)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(101)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
 
 
 //Text label year
@@ -1455,7 +1805,8 @@ vis.append("text")
       .text("2008")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 ///Text label months
@@ -1506,14 +1857,6 @@ for (i=1, j=104; i<=12, j<=115; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(104)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(115)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
 
 
 //Text label year
@@ -1523,7 +1866,8 @@ vis.append("text")
       .text("2007")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 ///Text label months
@@ -1575,14 +1919,7 @@ for (i=1, j=118; i<=12, j<=129; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(118)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(129)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
+
 
 
 //Text label year
@@ -1592,7 +1929,8 @@ vis.append("text")
       .text("2006")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 ///Text label months
@@ -1641,14 +1979,6 @@ for (i=1, j=132; i<=12, j<=143; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(132)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(143)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
 
 
 //Text label year
@@ -1658,7 +1988,8 @@ vis.append("text")
       .text("2005")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 ///Text label months
@@ -1710,14 +2041,6 @@ for (i=1, j=146; i<=12, j<=157; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(146)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(157)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
 
 
 //Text label year
@@ -1727,7 +2050,8 @@ vis.append("text")
       .text("2004")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -1778,14 +2102,6 @@ for (i=1, j=160; i<=12, j<=171; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(160)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(171)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
 
 
 //Text label year
@@ -1795,7 +2111,8 @@ vis.append("text")
       .text("2003")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -1848,14 +2165,6 @@ for (i=1, j=174; i<=12, j<=185; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(174)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(185)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
 
 
 //Text label year
@@ -1865,7 +2174,8 @@ vis.append("text")
       .text("2002")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 ///Text label months
@@ -1917,14 +2227,7 @@ for (i=1, j=188; i<=12, j<=199; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(188)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(199)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
+
 
 
 //Text label year
@@ -1934,7 +2237,8 @@ vis.append("text")
       .text("2001")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 ///Text label months
@@ -1987,16 +2291,6 @@ for (i=1, j=202; i<=12, j<=213; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(202)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(213)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
 
 
 //Text label year
@@ -2006,7 +2300,8 @@ vis.append("text")
       .text("2000")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -2062,16 +2357,6 @@ for (i=1, j=216; i<=12, j<=227; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(216)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(227)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
 
 
 //Text label year
@@ -2081,7 +2366,8 @@ vis.append("text")
       .text("1999")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -2138,16 +2424,6 @@ for (i=1, j=230; i<=12, j<=241; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(230)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(241)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
 
 
 //Text label year
@@ -2157,7 +2433,8 @@ vis.append("text")
       .text("1998")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -2212,16 +2489,6 @@ for (i=1, j=244; i<=12, j<=255; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(244)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(255)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
 
 
 //Text label year
@@ -2231,7 +2498,8 @@ vis.append("text")
       .text("1997")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -2287,16 +2555,6 @@ for (i=1, j=258; i<=12, j<=269; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(258)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(269)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
 
 
 //Text label year
@@ -2306,7 +2564,8 @@ vis.append("text")
       .text("1996")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -2363,16 +2622,6 @@ for (i=1, j=272; i<=12, j<=283; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(272)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(283)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
 
 
 //Text label year
@@ -2382,7 +2631,8 @@ vis.append("text")
       .text("1995")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -2439,15 +2689,6 @@ for (i=1, j=286; i<=12, j<=297; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(286)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(297)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
 
 
 
@@ -2458,7 +2699,8 @@ vis.append("text")
       .text("1994")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -2514,16 +2756,6 @@ for (i=1, j=300; i<=12, j<=311; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(300)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(311)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
 
 
 //Text label year
@@ -2533,7 +2765,8 @@ vis.append("text")
       .text("1993")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -2590,14 +2823,6 @@ for (i=1, j=314; i<=12, j<=325; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(314)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(325)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
 
 
 
@@ -2609,7 +2834,8 @@ vis.append("text")
       .text("1992")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -2665,14 +2891,6 @@ for (i=1, j=328; i<=12, j<=339; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(328)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(339)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
 
 
 
@@ -2684,7 +2902,8 @@ vis.append("text")
       .text("1991")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -2740,17 +2959,6 @@ for (i=1, j=342; i<=12, j<=353; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(342)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(353)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
 
 //Text label year
 vis.append("text")
@@ -2759,7 +2967,8 @@ vis.append("text")
       .text("1990")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -2815,17 +3024,6 @@ for (i=1, j=356; i<=12, j<=367; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(356)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(367)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
 
 //Text label year
 vis.append("text")
@@ -2834,7 +3032,8 @@ vis.append("text")
       .text("1989")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -2890,16 +3089,6 @@ for (i=1, j=370; i<=12, j<=381; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(370)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(381)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
 
 
 //Text label year
@@ -2909,7 +3098,8 @@ vis.append("text")
       .text("1988")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -2964,16 +3154,6 @@ for (i=1, j=384; i<=12, j<=395; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(384)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(395)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
 
 
 //Text label year
@@ -2983,7 +3163,8 @@ vis.append("text")
       .text("1987")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -3041,16 +3222,6 @@ for (i=1, j=398; i<=12, j<=409; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(398)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(409)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
 
 
 //Text label year
@@ -3060,7 +3231,8 @@ vis.append("text")
       .text("1986")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -3117,14 +3289,6 @@ for (i=1, j=412; i<=12, j<=423; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(412)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(423)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
 
 
 
@@ -3136,7 +3300,8 @@ vis.append("text")
       .text("1985")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -3192,17 +3357,6 @@ for (i=1, j=426; i<=12, j<=437; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(426)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(437)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
 
 //Text label year
 vis.append("text")
@@ -3211,7 +3365,8 @@ vis.append("text")
       .text("1984")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -3267,14 +3422,6 @@ for (i=1, j=440; i<=12, j<=451; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(440)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(451)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
 
 
 
@@ -3286,7 +3433,8 @@ vis.append("text")
       .text("1983")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -3343,17 +3491,6 @@ for (i=1, j=454; i<=12, j<=465; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(454)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(465)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
 
 //Text label year
 vis.append("text")
@@ -3362,7 +3499,8 @@ vis.append("text")
       .text("1982")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -3419,16 +3557,6 @@ for (i=1, j=468; i<=12, j<=479; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(468)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(479)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
 
 
 //Text label year
@@ -3438,7 +3566,8 @@ vis.append("text")
       .text("1981")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -3496,18 +3625,6 @@ for (i=1, j=482; i<=12, j<=493; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(482)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(493)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
 //Text label year
 vis.append("text")
       .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
@@ -3515,7 +3632,8 @@ vis.append("text")
       .text("1980")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -3571,17 +3689,6 @@ for (i=1, j=496; i<=12, j<=507; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(496)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(507)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
 
 //Text label year
 vis.append("text")
@@ -3590,7 +3697,8 @@ vis.append("text")
       .text("1979")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -3646,16 +3754,6 @@ for (i=1, j=510; i<=12, j<=521; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(510)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(521)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
 
 
 //Text label year
@@ -3665,7 +3763,8 @@ vis.append("text")
       .text("1978")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -3721,16 +3820,6 @@ for (i=1, j=524; i<=12, j<=535; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(524)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(535)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
 
 
 //Text label year
@@ -3740,7 +3829,8 @@ vis.append("text")
       .text("1977")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -3797,17 +3887,6 @@ for (i=1, j=538; i<=12, j<=549; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(538)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(549)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
 
 //Text label year
 vis.append("text")
@@ -3816,7 +3895,8 @@ vis.append("text")
       .text("1976")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -3871,17 +3951,6 @@ for (i=1, j=552; i<=12, j<=563; i++, j++){
 
 };
 
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(552)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(563)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
 
 //Text label year
 vis.append("text")
@@ -3890,7 +3959,8 @@ vis.append("text")
       .text("1975")
       .attr("font-family", "Roboto")
       .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
+      .attr("fill", colorPathText)
+      .attr("class", "labelYears")
 
 
 
@@ -3908,3032 +3978,26 @@ vis.append("text")
  };
 
 
-//////////////////////////////////////////////////////////// COLOR POINTS AS FUNCTION -> START /////////////////////
 
-function colorPoints(){
-
-
-$('.points').hide();
-
-
-/////// 2015 //////Points
-for (i=1, j=0; i<=4, j<=3; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,2015))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
+$( document ).ready(function() {
+$('.labelYears').hide();
+});
 
 
 
-       .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-           d3.select(this).attr("r", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("r", radius);
-        })
-
-    .attr("class", "points")
-
-  };
-
-
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){   return paddingY+  abstand(0)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){   return paddingY+  abstand(3)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
- 
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(1.5) })
-      .text("2015")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText)
-
-
-
-
-
-
-///Text label months
-for (h=1, j=0; h<=4, j<=3; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
-/////// 2014 //////
-for (i=1, j=6; i<=12, j<=17; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,2014))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-       .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-
-};
-
-
-
-  //Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(6)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(17)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(11.5) })
-      .text("2014")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText)
-
-           .on("click", function(){
-          $('.toggletest2014').toggle(1500) 
-    });
     
 
 
-///Text label months
-for (h=1, j=6; h<=12, j<=17; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
 
- };
-
-
-
-
-
-
-/////// 2013 //////
-for (i=1, j=20; i<=12, j<=31; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,2013))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-    .attr("class", "points")
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(20)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(31)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(25.5) })
-      .text("2013")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=20; h<=12, j<=31; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
-
-/////// 2012 //////
-for (i=1, j=34; i<=12, j<=45; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,2012))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-    .attr("class", "points")
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(34)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(45)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(39.5) })
-      .text("2012")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-///Text label months
-for (h=1, j=34; h<=12, j<=45; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
-/////// 2011 //////
-for (i=1, j=48; i<=12, j<=59; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,2011))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-    .attr("class", "points")
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(48)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(59)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(53.5) })
-      .text("2011")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-///Text label months
-for (h=1, j=48; h<=12, j<=59; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
-/////// 2010 //////
-for (i=1, j=62; i<=12, j<=73; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,2010))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-        .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(62)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(73)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(67.5) })
-      .text("2010")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-///Text label months
-for (h=1, j=62; h<=12, j<=73; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
-/////// 2009 //////
-for (i=1, j=76; i<=12, j<=87; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,2009))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-            .attr("class", "points")
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(76)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(87)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(81.5) })
-      .text("2009")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-///Text label months
-for (h=1, j=76; h<=12, j<=87; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
-
-
-
-
-/////// 2008 //////
-for (i=1, j=90; i<=12, j<=101; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,2008))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-            .attr("class", "points")
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(90)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(101)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(95.5) })
-      .text("2008")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-///Text label months
-for (h=1, j=90; h<=12, j<=101; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
-/////// 2007 //////
-for (i=1, j=104; i<=12, j<=115; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,2007))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-            .attr("class", "points")
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(104)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(115)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(109.5) })
-      .text("2007")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-///Text label months
-for (h=1, j=104; h<=12, j<=115; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
-
-      /////// 2006 //////
-for (i=1, j=118; i<=12, j<=129; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,2006))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-            .attr("class", "points")
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(118)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(129)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(123.5) })
-      .text("2006")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-///Text label months
-for (h=1, j=118; h<=12, j<=129; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-        /////// 2005 //////
-for (i=1, j=132; i<=12, j<=143; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,2005))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-            .attr("class", "points")
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(132)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(143)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(137.5) })
-      .text("2005")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-///Text label months
-for (h=1, j=132; h<=12, j<=143; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
-/////// 2004 //////
-for (i=1, j=146; i<=12, j<=157; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,2004))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-      
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(146)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(157)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(151.5) })
-      .text("2004")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=146; h<=12, j<=157; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-/////// 2003 //////
-for (i=1, j=160; i<=12, j<=171; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,2003))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(160)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(171)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(165.5) })
-      .text("2003")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=160; h<=12, j<=171; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
-
-/////// 2002 //////
-for (i=1, j=174; i<=12, j<=185; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,2002))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-          .attr("class", "points")
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(174)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(185)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(179.5) })
-      .text("2002")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-///Text label months
-for (h=1, j=174; h<=12, j<=185; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
-
-/////// 2001 //////
-for (i=1, j=188; i<=12, j<=199; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,2001))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-          .attr("class", "points")
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(188)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(199)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(193.5) })
-      .text("2001")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-///Text label months
-for (h=1, j=188; h<=12, j<=199; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
-/////// 2000 //////
-for (i=1, j=202; i<=12, j<=213; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,2000))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(202)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(213)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(207.5) })
-      .text("2000")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=202; h<=12, j<=213; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
-
-/////// 1999 //////
-for (i=1, j=216; i<=12, j<=227; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1999))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(216)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(227)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(221.5) })
-      .text("1999")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=216; h<=12, j<=227; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-/////// 1998 //////
-for (i=1, j=230; i<=12, j<=241; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1998))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(230)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(241)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(235.5) })
-      .text("1998")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=230; h<=12, j<=241; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-/////// 1997 //////
-for (i=1, j=244; i<=12, j<=255; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1997))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(244)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(255)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(249.5) })
-      .text("1997")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=244; h<=12, j<=255; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-/////// 1996 //////
-for (i=1, j=258; i<=12, j<=269; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1996))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(258)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(269)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(263.5) })
-      .text("1996")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=258; h<=12, j<=269; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
- /////// 1995 //////
-for (i=1, j=272; i<=12, j<=283; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1995))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(272)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(283)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(277.5) })
-      .text("1995")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=272; h<=12, j<=283; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
- /////// 1994 //////
-for (i=1, j=286; i<=12, j<=297; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1994))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(286)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(297)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(291.5) })
-      .text("1994")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=286; h<=12, j<=297; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-  /////// 1993 //////
-for (i=1, j=300; i<=12, j<=311; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1993))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(300)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(311)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(305.5) })
-      .text("1993")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=300; h<=12, j<=311; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
-   /////// 1992 //////
-for (i=1, j=314; i<=12, j<=325; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1992))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(314)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(325)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(319.5) })
-      .text("1992")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=314; h<=12, j<=325; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-   /////// 1991 //////
-for (i=1, j=328; i<=12, j<=339; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1991))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(328)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(339)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(333.5) })
-      .text("1991")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=328; h<=12, j<=339; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-   /////// 1990 //////
-for (i=1, j=342; i<=12, j<=353; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1990))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(342)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(353)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(347.5) })
-      .text("1990")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=342; h<=12, j<=353; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-   /////// 1989 //////
-for (i=1, j=356; i<=12, j<=367; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1989))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(356)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(367)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(361.5) })
-      .text("1989")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=356; h<=12, j<=367; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-   /////// 1988 //////
-for (i=1, j=370; i<=12, j<=381; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1988))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(370)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(381)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(375.5) })
-      .text("1988")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=370; h<=12, j<=381; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-    /////// 1987 //////
-for (i=1, j=384; i<=12, j<=395; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1987))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(384)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(395)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(389.5) })
-      .text("1987")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=384; h<=12, j<=395; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
-
-     /////// 1986 //////
-for (i=1, j=398; i<=12, j<=409; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1986))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(398)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(409)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(403.5) })
-      .text("1986")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=398; h<=12, j<=409; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
-     /////// 1985 //////
-for (i=1, j=412; i<=12, j<=423; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1985))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(412)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(423)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(417.5) })
-      .text("1985")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=412; h<=12, j<=423; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-      /////// 1984 //////
-for (i=1, j=426; i<=12, j<=437; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1984))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(426)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(437)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(431.5) })
-      .text("1984")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=426; h<=12, j<=437; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-      /////// 1983 //////
-for (i=1, j=440; i<=12, j<=451; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1983))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(440)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(451)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(445.5) })
-      .text("1983")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=440; h<=12, j<=451; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
-      /////// 1982 //////
-for (i=1, j=454; i<=12, j<=465; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1982))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(454)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(465)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(459.5) })
-      .text("1982")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=454; h<=12, j<=465; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
-      /////// 1981 //////
-for (i=1, j=468; i<=12, j<=479; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1981))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(468)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(479)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(473.5) })
-      .text("1981")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=468; h<=12, j<=479; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
-
-      /////// 1980 //////
-for (i=1, j=482; i<=12, j<=493; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1980))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(482)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(493)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(487.5) })
-      .text("1980")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=482; h<=12, j<=493; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
- /////// 1979 //////
-for (i=1, j=496; i<=12, j<=507; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1979))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(496)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(507)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(501.5) })
-      .text("1979")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=496; h<=12, j<=507; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
- /////// 1978 //////
-for (i=1, j=510; i<=12, j<=521; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1978))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(510)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(521)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(515.5) })
-      .text("1978")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=510; h<=12, j<=521; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
- /////// 1977 //////
-for (i=1, j=524; i<=12, j<=535; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1977))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(524)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(535)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(529.5) })
-      .text("1977")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=524; h<=12, j<=535; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
-
-
- /////// 1976 //////
-for (i=1, j=538; i<=12, j<=549; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1976))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-      .attr("class", "points")
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(538)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(549)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(543.5) })
-      .text("1976")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=538; h<=12, j<=549; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-
-
- /////// 1975 //////
-for (i=1, j=552; i<=12, j<=563; i++, j++){
-  vis.selectAll("circles")
-      .data(dataInput(i,1975))
-      .enter()
-      .append("circle")
-      .attr("fill", function(d){
-        if (d.Identifikation == "") { return alt} else {return color};
-      })
-      .attr("cx", function(d,i){   return paddingX + i*zwischen            
-      })
-      .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-      .attr("class", "points")
-
-
-};
-
-//Path left
-vis.append("line")          // attach a line
-    .style("stroke", colorPath)  // colour the line
-    .attr("x1", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the first end of the line
-    .attr("y1", function(d){  return paddingY+  abstand(552)})      // y position of the first end of the line
-    .attr("x2", function(d,i){   return paddingX -20 + i*zwischen})     // x position of the second end of the line
-    .attr("y2", function(d){  return paddingY+  abstand(563)})    // y position of the second end of the line
-    .attr("stroke-width",.5)
-
-
-
-
-//Text label year
-vis.append("text")
-      .attr("x", function(d,i) {  return paddingX -labelPad + i*zwischen})
-      .attr("y", function(d) { return paddingY+  abstand(557.5) })
-      .text("1975")
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSize+"px")
-      .attr("fill", colorPathText);
-
-
-
-///Text label months
-for (h=1, j=552; h<=12, j<=563; h++, j++){
-vis.append("text")
-      .attr("x", paddingX -50)
-      .attr("y", paddingY+2+  abstand(j)) 
-      .text(scaleMonth(h))
-      .attr("font-family", "Roboto")
-      .attr("font-size", fontSizeMonths+"px")
-      .attr("fill", alt)
-      .attr("class", "labelMonths")
-
- };
-  
-};
-
-
-//////////////////////////////////////////////////////////// COLOR POINTS AS FUNCTION -> OVER /////////////////////
-
-
-/// Button interaction ///
+////// Button interaction //////
 
 
 
 //Show Years
 $("#fadeYears").on ("click",function() {
-    console.log('Event Fired');
-    $('.points').hide();
     $('.labelMonths').hide();
+    $('.labelYears').hide();
+    $('.points').hide();
     fireLine();
     $('.line').hide();
 });
@@ -6943,11 +4007,11 @@ $("#fadeYears").on ("click",function() {
 $('.points').hide();
     $('.labelMonths').hide();
 $("#toggleMonths").on("click", function(){
-    $('.labelMonths').hide();
     $('.line').hide();
     $(".points").show();
     $('.line').show();
     $('.labelMonths').show();
+    $('.labelYears').show();
     $('.line').hide();
     $('.axis').hide();
 });
@@ -6996,10 +4060,6 @@ window.onload = function() {
             shareable: false
         })
       };
-
-
-
-
 
 
 

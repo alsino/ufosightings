@@ -139,7 +139,7 @@ height: 100%;
 .line {
     fill: none;
     stroke: url(#line-gradient);
-    stroke-width: 2px;
+    stroke-width: 1px;
 }
 
 
@@ -196,12 +196,6 @@ color: grey;
 color: grey;
 }
 
-#social{
-  background-color: #197575;
-  color: white;
-  padding-top: 10%;
-  padding-right: 10%;
-}
 
 
 #foot{

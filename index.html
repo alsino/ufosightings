@@ -55,6 +55,7 @@ Im Land der 'UFOs'
     <button type="button" id="toggleMonths">Sichtungen pro Monat</button>
     <button type="button" id="toggleElse">Zeige aufgeklärte Fälle </button>
   </div>
+  <div id="testip"></div>
 </div>
 
 <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
@@ -111,8 +112,10 @@ var zwischen = 10;
 var color ="orange";
 //var color = "white";
 //var steelblue = d3.lab(52, -4, -32);
-var alt = "white";
-var unident ="white"
+var alt = "grey";
+var unident = "white";
+var unident2 = "purple";
+var alt2 = "#197575";
 
 //Variable für path und text Farbe
 var colorPath = "white";
@@ -244,8 +247,8 @@ function dataInput(month,year){
       .attr("gradientUnits", "userSpaceOnUse")
     .selectAll("stop")
       .data([
-        {offset: "0%", color: "#197575"},
-        {offset: "30%", color: "gray"},
+        {offset: "0%", color: "gray"},
+        {offset: "30%", color: "#197575"},
         {offset: "80%", color: "orange"}
       ])
     .enter().append("stop")
@@ -259,6 +262,22 @@ var abstandLine = function abstandL (p){
    var s =25;
    return 500 + s*p;
 }
+
+
+//Make tooltip///
+
+var tooltip = d3.select('#canvas')            // NEW 
+  .append('div')                             // NEW
+  .attr('class', 'tooltip');                 // NEW
+
+tooltip.append('div')                        // NEW
+  .attr('class', 'label');                   // NEW
+
+tooltip.append('div')                        // NEW
+  .attr('class', 'count');                   // NEW
+
+tooltip.append('div')                        // NEW
+  .attr('class', 'percent');                 // NEW
 
 
 
@@ -281,6 +300,9 @@ vis.append("line") // -> stroke-width defined in CSS
       .attr("x2", paddingX+ 2.5*j2015.length)
       .attr("stroke-linecap", "round")
       .attr("class", "line")
+
+
+
 
 
 //Label Line
@@ -1272,7 +1294,7 @@ vis.append("text")
 
 //1975 Pre-layout with Line
 var j1975 = json.filter(function(d,i) { return d.Jahr ==1975; });
-vis.append("line")
+var yabba1975= vis.append("line")
       .attr("x1", paddingX)
       .attr ("y1", abstandLine(22))
       .attr("x2", paddingX)
@@ -1318,7 +1340,6 @@ var Xscale = d3.scale.linear()
 
 
 
-
     };
 /// FUNCTION ENDS HERE /////
 
@@ -1327,37 +1348,43 @@ var Xscale = d3.scale.linear()
 // START DOT GRAPH FROM HERE ////
 
 /////// 2015 //////Points
+
 for (i=1, j=0; i<=4, j<=3; i++, j++){
-  vis.selectAll("circles")
+vis.selectAll("circles")
       .data(dataInput(i,2015))
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
+      .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);
+          d3.select("#testip").style('visibility', 'visible');
+          d3.select("#testip").html(d.Beschreibung);})
 
 
 
-       .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-           d3.select(this).attr("r", radius*4);
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);
+          d3.select("#testip").style('visibility', 'hidden');
+
         })
 
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("r", radius);
-        })
 
-    .attr("class", "points")
+      .on('mousemove', function(d) {
+          d3.select("#testip").style('top', (d3.event.pageY - 15) + 'px')
+          .style('left', (d3.event.pageX + 10) + 'px');});
+                         
 
   };
-
 
 
 //Text label year
@@ -1389,35 +1416,38 @@ vis.append("text")
 
 /////// 2014 //////
 for (i=1, j=6; i<=12, j<=17; i++, j++){
-  vis.selectAll("circles")
+  var yabba14= vis.selectAll("circles")
       .data(dataInput(i,2014))
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-       .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
 
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);
+          d3.select("#testip").style('visibility', 'visible');
+          d3.select("#testip").html(d.Beschreibung);})
 
+
+
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);
+          d3.select("#testip").style('visibility', 'hidden');
+
+        })
+
+
+      .on('mousemove', function(d) {
+          d3.select("#testip").style('top', (d3.event.pageY - 15) + 'px')
+          .style('left', (d3.event.pageX + 10) + 'px');});
 
 };
 
@@ -1458,34 +1488,26 @@ vis.append("text")
 
 /////// 2013 //////
 for (i=1, j=20; i<=12, j<=31; i++, j++){
-  vis.selectAll("circles")
+  var yabba13 =vis.selectAll("circles")
       .data(dataInput(i,2013))
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
+      .attr("class", "points")
 
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-    .attr("class", "points")
 };
 
 
@@ -1526,29 +1548,21 @@ for (i=1, j=34; i<=12, j<=45; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
 
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
+      .attr("class", "points")
 
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-    .attr("class", "points")
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 };
 
 
@@ -1587,28 +1601,20 @@ for (i=1, j=48; i<=12, j<=59; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
+      .attr("class", "points")
 
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-    .attr("class", "points")
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 };
 
 
@@ -1647,29 +1653,21 @@ for (i=1, j=62; i<=12, j<=73; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
 
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
+      .attr("class", "points")
 
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-        .attr("class", "points")
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 };
@@ -1710,28 +1708,20 @@ for (i=1, j=76; i<=12, j<=87; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
+      .attr("class", "points")
 
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-            .attr("class", "points")
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 };
 
@@ -1771,28 +1761,20 @@ for (i=1, j=90; i<=12, j<=101; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
+      .attr("class", "points")
 
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-            .attr("class", "points")
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 };
 
@@ -1832,28 +1814,20 @@ for (i=1, j=104; i<=12, j<=115; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
+      .attr("class", "points")
 
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-            .attr("class", "points")
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 };
 
@@ -1894,28 +1868,20 @@ for (i=1, j=118; i<=12, j<=129; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
+      .attr("class", "points")
 
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-            .attr("class", "points")
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 };
 
@@ -1954,28 +1920,20 @@ for (i=1, j=132; i<=12, j<=143; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
+      .attr("class", "points")
 
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-            .attr("class", "points")
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 };
 
@@ -2015,28 +1973,20 @@ for (i=1, j=146; i<=12, j<=157; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
-      .attr("r", radius)
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-      
+      .attr("r", radius)  
       .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 };
@@ -2077,28 +2027,20 @@ for (i=1, j=160; i<=12, j<=171; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 };
 
@@ -2140,28 +2082,21 @@ for (i=1, j=174; i<=12, j<=185; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
+      .attr("class", "points")
 
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
 
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-          .attr("class", "points")
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 };
 
@@ -2202,28 +2137,20 @@ for (i=1, j=188; i<=12, j<=199; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
+      .attr("class", "points")
 
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
-          .attr("class", "points")
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 };
 
@@ -2264,29 +2191,20 @@ for (i=1, j=202; i<=12, j<=213; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 };
@@ -2329,30 +2247,20 @@ for (i=1, j=216; i<=12, j<=227; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 };
@@ -2393,32 +2301,20 @@ for (i=1, j=230; i<=12, j<=241; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 
@@ -2459,32 +2355,20 @@ for (i=1, j=244; i<=12, j<=255; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 };
@@ -2525,32 +2409,21 @@ for (i=1, j=258; i<=12, j<=269; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 };
@@ -2592,32 +2465,20 @@ for (i=1, j=272; i<=12, j<=283; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 };
@@ -2659,32 +2520,21 @@ for (i=1, j=286; i<=12, j<=297; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 };
@@ -2726,32 +2576,20 @@ for (i=1, j=300; i<=12, j<=311; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 };
@@ -2793,32 +2631,21 @@ for (i=1, j=314; i<=12, j<=325; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
+      
 
 
 };
@@ -2861,33 +2688,20 @@ for (i=1, j=328; i<=12, j<=339; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
 
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 };
 
@@ -2929,33 +2743,21 @@ for (i=1, j=342; i<=12, j<=353; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
 
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 };
 
@@ -2994,33 +2796,20 @@ for (i=1, j=356; i<=12, j<=367; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
 
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 };
 
@@ -3059,32 +2848,20 @@ for (i=1, j=370; i<=12, j<=381; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 };
@@ -3124,32 +2901,20 @@ for (i=1, j=384; i<=12, j<=395; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 };
@@ -3192,32 +2957,20 @@ for (i=1, j=398; i<=12, j<=409; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 };
@@ -3259,32 +3012,20 @@ for (i=1, j=412; i<=12, j<=423; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 };
@@ -3327,32 +3068,20 @@ for (i=1, j=426; i<=12, j<=437; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 };
@@ -3392,32 +3121,20 @@ for (i=1, j=440; i<=12, j<=451; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 };
@@ -3461,32 +3178,20 @@ for (i=1, j=454; i<=12, j<=465; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 };
@@ -3527,32 +3232,20 @@ for (i=1, j=468; i<=12, j<=479; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 };
@@ -3595,32 +3288,20 @@ for (i=1, j=482; i<=12, j<=493; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 };
@@ -3659,32 +3340,20 @@ for (i=1, j=496; i<=12, j<=507; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 };
@@ -3724,32 +3393,20 @@ for (i=1, j=510; i<=12, j<=521; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 };
@@ -3790,33 +3447,20 @@ for (i=1, j=524; i<=12, j<=535; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
 
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 };
 
@@ -3857,31 +3501,22 @@ for (i=1, j=538; i<=12, j<=549; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
       .attr("class", "points")
 
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
 
 
 
@@ -3921,32 +3556,20 @@ for (i=1, j=552; i<=12, j<=563; i++, j++){
       .enter()
       .append("circle")
       .attr("fill", function(d){
-        if (d.Identifikation == "") { return unident} else {return unident};
+        if (d.Identifikation == "") { return unident} else {return alt2};
       })
       .attr("cx", function(d,i){   return paddingX + i*zwischen            
       })
       .attr ("cy", function(d){  return paddingY+  abstand(j)})
       .attr("r", radius)
-
-
-
-
-
-         .on('mouseover', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', 'white');
-          d3.select(this).attr("ry", radius*2);
-           d3.select(this).attr("rx", radius*4);
-        })
-
-    .on('mouseout', function(d) {
-          console.log(d);
-          d3.select(this).style('fill', color);
-           d3.select(this).attr("ry", radius);
-           d3.select(this).attr("rx", radius);
-        })
-
       .attr("class", "points")
+
+      .on('mouseover', function(d) {
+          d3.select(this).attr("r", radius*2.5);})
+      .on('mouseout', function(d) {
+          d3.select(this).attr("fill", function(d){
+            if (d.Identifikation == "") { return unident} else {return alt2};})
+          d3.select(this).attr("r", radius);})
 
 
 };
@@ -3979,10 +3602,51 @@ vis.append("text")
 
 
 
+ //Legende Punkte
+ vis.append("circle")
+      .attr("cx", 1350)
+      .attr("cy", 530)
+      .attr("r", 3)
+      .style("fill","white")
+      .attr("class", "legende")
+
+   vis.append("text")
+      .attr("x", 1360)
+      .attr("y", 532) 
+      .text("- unidentifizierte Fälle")
+      .attr("font-family", "Roboto")
+      .attr("font-size", "12px")
+      .attr("fill", alt)
+      .attr("class", "legende")
+
+
+ vis.append("circle")
+      .attr("cx", 1350)
+      .attr("cy", 550)
+      .attr("r", 3)
+      .style("fill","#197575")
+      .attr("class", "legende")
+
+ vis.append("text")
+      .attr("x", 1360)
+      .attr("y", 552) 
+      .text("- indentifizierte Fälle")
+      .attr("font-family", "Roboto")
+      .attr("font-size", "12px")
+      .attr("fill", alt)
+      .attr("class", "legende")
+
+
+      
+
+
+
+
 $( document ).ready(function() {
 $('.labelYears').hide();
-});
+$('.legende').hide();
 
+});
 
 
     
@@ -3997,6 +3661,7 @@ $('.labelYears').hide();
 $("#fadeYears").on ("click",function() {
     $('.labelMonths').hide();
     $('.labelYears').hide();
+    $('.legende').hide();
     $('.points').hide();
     fireLine();
     $('.line').hide();
@@ -4012,21 +3677,10 @@ $("#toggleMonths").on("click", function(){
     $('.line').show();
     $('.labelMonths').show();
     $('.labelYears').show();
+    $('.labelLine').hide();
     $('.line').hide();
     $('.axis').hide();
-});
-
-
-
-
-//Show years colored
-$("#toggleElse").on ("click", function(){
-    $('.points').hide();
-    $('.labelMonths').hide();
-    $('.line').hide();
-    $('.line').hide();
-    $('.axis').hide();
-    colorPoints();
+    $('.legende').show();
 
 });
 
@@ -4037,8 +3691,16 @@ $("#toggleElse").on ("click", function(){
 
 
 
+});
 
-    });
+
+
+
+
+
+
+
+
 
 window.onload = function() {
   cartodb.createVis('map', 'https://alsinocodeweek.cartodb.com/api/v2/viz/b0e45fd8-1f2c-11e5-acd7-0e4fddd5de28/viz.json', {

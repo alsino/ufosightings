@@ -132,13 +132,18 @@ height: 100%;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
+  z-index: 1;
 }
 
 
 .line {
     fill: none;
     stroke: url(#line-gradient);
-    stroke-width: 2px;
+    stroke-width: 4px;
+}
+
+.legende{
+  padding-left: 50%;
 }
 
 
@@ -195,6 +200,18 @@ color: grey;
 color: grey;
 }
 
+
+#testip{
+  background-color: #0A0C18;
+  color: white;
+  opacity: 0.9;
+  position: absolute;
+  z-index: 3;
+  font-size: 0.8em;
+  font-family: 'Roboto',sans-serif;
+  padding: 2%;
+  width: 300px;
+}
 
 
 #foot{
